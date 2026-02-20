@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Julia Zdzilowska — Full-Stack Software Engineer. 10+ years building accessible, user-centered digital experiences.">
+    <title>Julia Zdzilowska</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Custom cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- NAV -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">JZ</a>
+        <div class="nav-pills">
+            <a href="#work" class="nav-pill">Work</a>
+            <a href="#about" class="nav-pill">About</a>
+            <a href="#contact" class="nav-pill">Contact</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-close" id="mobileClose">✕</button>
+        <a href="#work" class="mobile-link">Work</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-top">
+            <div class="available-badge">
+                <span class="badge-dot"></span>
+                Available for new projects
+            </div>
+            <div class="hero-role mono">Full-Stack Software Engineer</div>
+        </div>
+
+        <div class="hero-center">
+            <h1 class="hero-name">
+                <span class="name-outline" id="scrambleTarget">JULIA</span>
+                <span class="name-solid">ZDZILOWSKA</span>
+            </h1>
+            <div class="hero-badge-years">
+                <div class="years-num">10<span class="plus">+</span></div>
+                <div class="years-text mono">years of<br>experience</div>
+            </div>
+        </div>
+
+        <div class="hero-bottom">
+            <p class="hero-desc">
+                Building scalable software at the<br>
+                intersection of engineering &amp; design.<br>
+                Based in Providence, RI.
+            </p>
+            <div class="hero-scroll mono">
+                <span class="scroll-line"></span>
+                scroll down
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                React &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; Python &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; Docker &nbsp;·&nbsp; PostgreSQL &nbsp;·&nbsp; AWS &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Accessibility &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; UI/UX &nbsp;·&nbsp; MERN Stack &nbsp;·&nbsp; Java &nbsp;·&nbsp; C/C++ &nbsp;·&nbsp; Git &nbsp;·&nbsp; Vercel &nbsp;·&nbsp; Brown University &nbsp;·&nbsp;
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                React &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; Python &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; Docker &nbsp;·&nbsp; PostgreSQL &nbsp;·&nbsp; AWS &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Accessibility &nbsp;·&nbsp; Full-Stack &nbsp;·&nbsp; UI/UX &nbsp;·&nbsp; MERN Stack &nbsp;·&nbsp; Java &nbsp;·&nbsp; C/C++ &nbsp;·&nbsp; Git &nbsp;·&nbsp; Vercel &nbsp;·&nbsp; Brown University &nbsp;·&nbsp;
+            </div>
+        </div>
+    </div>
+
+    <!-- WORK -->
+    <section id="work" class="section">
+        <div class="section-head">
+            <span class="section-label mono">Selected Work</span>
+            <span class="section-count mono">(04)</span>
+        </div>
+
+        <div class="work-grid">
+            <!-- LEFT COLUMN -->
+            <div class="work-col col-left">
+
+                <a href="personas.html" class="project reveal">
+                    <div class="project-thumb thumb-dots">
+                        <div class="thumb-overlay mono">View Project →</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-num mono">01</span>
+                        <h3 class="project-title">Personas &amp;<br>Storyboarding</h3>
+                        <p class="project-desc">User research case study investigating the Mail Room Kiosk at Brown University. Captured diverse user experiences through observation.</p>
+                        <div class="tags">
+                            <span class="tag">UX Research</span>
+                            <span class="tag">Personas</span>
+                            <span class="tag">Storyboarding</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="politechnika.html" class="project reveal">
+                    <div class="project-thumb thumb-lines">
+                        <div class="thumb-overlay mono">View Project →</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-num mono">03</span>
+                        <h3 class="project-title">Politechnika<br>Krakowska</h3>
+                        <p class="project-desc">Responsive redesign enhancing visual appeal, usability, and accessibility with modern design principles and WCAG compliance.</p>
+                        <div class="tags">
+                            <span class="tag">Responsive Design</span>
+                            <span class="tag">Accessibility</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- RIGHT COLUMN (offset) -->
+            <div class="work-col col-right">
+
+                <a href="zest.html" class="project reveal">
+                    <div class="project-thumb thumb-circles">
+                        <div class="thumb-overlay mono">View Project →</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-num mono">02</span>
+                        <h3 class="project-title">Zest UI<br>Redesign</h3>
+                        <p class="project-desc">Onboarding flow redesign for an online gifting platform. Transformed a fragmented setup into a structured, intuitive experience.</p>
+                        <div class="tags">
+                            <span class="tag">UI/UX Design</span>
+                            <span class="tag">Wireframing</span>
+                            <span class="tag">Prototyping</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="components.html" class="project reveal">
+                    <div class="project-thumb thumb-grid">
+                        <div class="thumb-overlay mono">View Project →</div>
+                    </div>
+                    <div class="project-body">
+                        <span class="project-num mono">04</span>
+                        <h3 class="project-title">Pinterest<br>Accessibility</h3>
+                        <p class="project-desc">Accessibility evaluation and redesign of dropdown menu components. Improved keyboard navigation and screen reader support.</p>
+                        <div class="tags">
+                            <span class="tag">Accessibility</span>
+                            <span class="tag">Components</span>
+                            <span class="tag">Interaction</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about-section">
+        <div class="section-head">
+            <span class="section-label mono">About</span>
+        </div>
+
+        <div class="about-grid">
+            <div class="about-left reveal">
+                <div class="about-statement">
+                    I build things<br>
+                    that <em>actually</em><br>
+                    work.
+                </div>
+            </div>
+            <div class="about-right reveal">
+                <p class="about-text">
+                    Developer at Brown University with 10+ years crafting scalable, maintainable applications. My work lives at the intersection of solid engineering and thoughtful design — finding elegant solutions to genuinely hard problems.
+                </p>
+                <div class="skill-stack">
+                    <div class="skill-group">
+                        <div class="skill-label mono">Languages</div>
+                        <div class="tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">C / C++</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-label mono">Frameworks</div>
+                        <div class="tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">MERN Stack</span>
+                        </div>
+                    </div>
+                    <div class="skill-group">
+                        <div class="skill-label mono">Tools</div>
+                        <div class="tags">
+                            <span class="tag">Git</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">Figma</span>
+                            <span class="tag">Vercel</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact-section">
+        <span class="contact-label mono reveal">Let's work together</span>
+        <a href="mailto:zdzilowska@gmail.com" class="contact-email reveal" id="contactEmail">
+            zdzilowska<br>@gmail.com
+        </a>
+        <div class="contact-bottom reveal">
+            <div class="contact-links">
+                <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener" class="clink">
+                    GitHub <span class="clink-arrow">↗</span>
+                </a>
+                <a href="https://www.linkedin.com/in/zdzilowska/" target="_blank" rel="noopener" class="clink">
+                    LinkedIn <span class="clink-arrow">↗</span>
+                </a>
+                <a href="https://www.instagram.com/zdzilowska/" target="_blank" rel="noopener" class="clink">
+                    Instagram <span class="clink-arrow">↗</span>
+                </a>
+                <a href="https://i.ibb.co/Ng4XZ74L/Julia-Zdzilowska-CV.png" target="_blank" rel="noopener" class="clink">
+                    Resume <span class="clink-arrow">↗</span>
+                </a>
+            </div>
+            <div class="contact-phone mono">
+                <a href="tel:+13312800276">+1 (331) 280-0276</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <span class="mono footer-copy">© 2026</span>
+        <span class="footer-name">Julia Zdzilowska</span>
+        <span class="mono footer-copy">All rights reserved</span>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
