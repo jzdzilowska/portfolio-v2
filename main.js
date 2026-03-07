@@ -1,94 +1,97 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ================================================
+  /* ════════════════════════════════════════════
      CUSTOM CURSOR  (mix-blend-mode: difference)
-     – cursor ring lags behind mouse for a cool feel
-     ================================================ */
+     White disc that inverts color of everything
+     beneath it.  Lags slightly for personality.
+  ════════════════════════════════════════════ */
   const cursor = document.getElementById('cursor');
 
-  if (cursor && window.innerWidth > 768) {
-    let mouseX = 0, mouseY = 0;
-    let curX = 0, curY = 0;
+  if (cursor && window.matchMedia('(pointer:fine)').matches) {
+    let mx = 0, my = 0, cx = 0, cy = 0;
 
-    document.addEventListener('mousemove', e => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
-    // Smooth follow via rAF
-    const followCursor = () => {
-      curX += (mouseX - curX) * 0.14;
-      curY += (mouseY - curY) * 0.14;
-      cursor.style.left = curX + 'px';
-      cursor.style.top  = curY + 'px';
-      requestAnimationFrame(followCursor);
+    const tick = () => {
+      cx += (mx - cx) * 0.13;
+      cy += (my - cy) * 0.13;
+      cursor.style.left = cx + 'px';
+      cursor.style.top  = cy + 'px';
+      requestAnimationFrame(tick);
     };
-    followCursor();
+    tick();
 
-    // Grow on interactive elements
-    const hoverEls = document.querySelectorAll('a, button, .project, .name-outline, .contact-email');
-    hoverEls.forEach(el => {
+    // Grow on interactive targets
+    document.querySelectorAll('a, button, .proj, .c-email').forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('big'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
     });
 
-    document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
-    document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
+    // Fade out when pointer leaves window
+    document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+    document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
   }
 
 
-  /* ================================================
-     LETTER SCRAMBLE  — hover JULIA in the hero
-     ================================================ */
-  const target = document.getElementById('scrambleTarget');
-  if (target) {
-    const CHARS   = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const ORIGINAL = 'JULIA';
-    let rafId  = null;
-    let frame  = 0;
+  /* ════════════════════════════════════════════
+     SIDEBAR SCROLL PROGRESS
+     A 1.5px bar that climbs the sidebar's right
+     edge as the user scrolls down.
+  ════════════════════════════════════════════ */
+  const progressBar = document.getElementById('sidebarProgress');
 
-    const scramble = () => {
-      const total = ORIGINAL.length * 5; // how many frames until fully resolved
-      target.textContent = ORIGINAL.split('').map((letter, i) => {
-        if (frame >= i * 5 + 5) return letter; // resolved
-        return CHARS[Math.floor(Math.random() * CHARS.length)];
-      }).join('');
-      frame++;
-      if (frame <= total) rafId = requestAnimationFrame(scramble);
-      else target.textContent = ORIGINAL;
+  if (progressBar) {
+    const update = () => {
+      const scrolled  = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const pct       = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
+      progressBar.style.height = pct + '%';
     };
-
-    target.addEventListener('mouseenter', () => {
-      cancelAnimationFrame(rafId);
-      frame = 0;
-      scramble();
-    });
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   }
 
 
-  /* ================================================
+  /* ════════════════════════════════════════════
+     ACTIVE NAV LINK  (sidebar)
+  ════════════════════════════════════════════ */
+  const sLinks   = document.querySelectorAll('.s-link');
+  const sections = document.querySelectorAll('section[id]');
+
+  const highlightNav = () => {
+    const mid = window.scrollY + window.innerHeight / 2;
+    sections.forEach(sec => {
+      if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
+        sLinks.forEach(l => l.classList.remove('active'));
+        const match = document.querySelector(`.s-link[href="#${sec.id}"]`);
+        if (match) match.classList.add('active');
+      }
+    });
+  };
+  window.addEventListener('scroll', highlightNav, { passive: true });
+  highlightNav();
+
+
+  /* ════════════════════════════════════════════
      MOBILE NAV
-     ================================================ */
-  const navToggle  = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const mobileClose = document.getElementById('mobileClose');
+  ════════════════════════════════════════════ */
+  const mobToggle  = document.getElementById('mobToggle');
+  const mobOverlay = document.getElementById('mobOverlay');
+  const mobClose   = document.getElementById('mobClose');
 
-  const openMenu  = () => { mobileMenu.classList.add('open');  document.body.style.overflow = 'hidden'; };
-  const closeMenu = () => { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; };
+  const openMenu  = () => { mobOverlay.classList.add('open');  document.body.style.overflow = 'hidden'; };
+  const closeMenu = () => { mobOverlay.classList.remove('open'); document.body.style.overflow = ''; };
 
-  if (navToggle)   navToggle.addEventListener('click', openMenu);
-  if (mobileClose) mobileClose.addEventListener('click', closeMenu);
-
-  mobileMenu && mobileMenu.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
+  mobToggle  && mobToggle.addEventListener('click', openMenu);
+  mobClose   && mobClose.addEventListener('click', closeMenu);
+  mobOverlay && mobOverlay.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
 
 
-  /* ================================================
-     SMOOTH SCROLL for anchor links
-     ================================================ */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+  /* ════════════════════════════════════════════
+     SMOOTH SCROLL  (anchor links)
+  ════════════════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function (e) {
       const href = this.getAttribute('href');
       if (href && href !== '#') {
         e.preventDefault();
@@ -99,32 +102,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ================================================
+  /* ════════════════════════════════════════════
      SCROLL REVEAL  — staggered fade-up
-     ================================================ */
-  const revealEls = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, idx) => {
+  ════════════════════════════════════════════ */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), idx * 110);
-        observer.unobserve(entry.target);
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  revealEls.forEach(el => observer.observe(el));
-
-
-  /* ================================================
-     HERO — subtle parallax on name on scroll
-     ================================================ */
-  const nameSolid = document.querySelector('.name-solid');
-  if (nameSolid) {
-    window.addEventListener('scroll', () => {
-      const y = window.pageYOffset;
-      nameSolid.style.transform = `translateY(${y * 0.06}px)`;
-    }, { passive: true });
-  }
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 });
