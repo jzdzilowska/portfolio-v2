@@ -1,94 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ════════════════════════════════════════════
-     CUSTOM CURSOR  (mix-blend-mode: difference)
-     White disc that inverts color of everything
-     beneath it.  Lags slightly for personality.
+     CUSTOM CURSOR
   ════════════════════════════════════════════ */
-  const cursor = document.getElementById('cursor');
+  const cursor = document.createElement('div');
+  cursor.className = 'cursor';
+  document.body.appendChild(cursor);
 
-  if (cursor && window.matchMedia('(pointer:fine)').matches) {
+  if (window.matchMedia('(pointer:fine)').matches) {
     let mx = 0, my = 0, cx = 0, cy = 0;
 
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
 
     const tick = () => {
-      cx += (mx - cx) * 0.13;
-      cy += (my - cy) * 0.13;
+      cx += (mx - cx) * 0.12;
+      cy += (my - cy) * 0.12;
       cursor.style.left = cx + 'px';
       cursor.style.top  = cy + 'px';
       requestAnimationFrame(tick);
     };
     tick();
 
-    // Grow on interactive targets
-    document.querySelectorAll('a, button, .proj, .c-email').forEach(el => {
+    const hoverEls = 'a, button, .work-item__header, .gallery__item, .fun-card, .contact__email';
+    document.querySelectorAll(hoverEls).forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('big'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
     });
 
-    // Fade out when pointer leaves window
     document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
     document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+  } else {
+    cursor.style.display = 'none';
   }
 
 
   /* ════════════════════════════════════════════
-     SIDEBAR SCROLL PROGRESS
-     A 1.5px bar that climbs the sidebar's right
-     edge as the user scrolls down.
+     HERO — staggered line reveal
   ════════════════════════════════════════════ */
-  const progressBar = document.getElementById('sidebarProgress');
-
-  if (progressBar) {
-    const update = () => {
-      const scrolled  = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const pct       = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
-      progressBar.style.height = pct + '%';
-    };
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-  }
+  const heroLines = document.querySelectorAll('.hero__line');
+  heroLines.forEach((line, i) => {
+    setTimeout(() => line.classList.add('visible'), 350 + i * 130);
+  });
 
 
   /* ════════════════════════════════════════════
-     ACTIVE NAV LINK  (sidebar)
+     FULLSCREEN MENU
   ════════════════════════════════════════════ */
-  const sLinks   = document.querySelectorAll('.s-link');
-  const sections = document.querySelectorAll('section[id]');
+  const navToggle = document.getElementById('navToggle');
+  const menu      = document.getElementById('menu');
+  const menuClose = document.getElementById('menuClose');
 
-  const highlightNav = () => {
-    const mid = window.scrollY + window.innerHeight / 2;
-    sections.forEach(sec => {
-      if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
-        sLinks.forEach(l => l.classList.remove('active'));
-        const match = document.querySelector(`.s-link[href="#${sec.id}"]`);
-        if (match) match.classList.add('active');
-      }
+  const openMenu  = () => { menu.classList.add('open');    document.body.style.overflow = 'hidden'; };
+  const closeMenu = () => { menu.classList.remove('open'); document.body.style.overflow = ''; };
+
+  if (navToggle) navToggle.addEventListener('click', openMenu);
+  if (menuClose) menuClose.addEventListener('click', closeMenu);
+
+  // Close on link click
+  menu.querySelectorAll('.menu__link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMenu();
     });
-  };
-  window.addEventListener('scroll', highlightNav, { passive: true });
-  highlightNav();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu();
+  });
 
 
   /* ════════════════════════════════════════════
-     MOBILE NAV
-  ════════════════════════════════════════════ */
-  const mobToggle  = document.getElementById('mobToggle');
-  const mobOverlay = document.getElementById('mobOverlay');
-  const mobClose   = document.getElementById('mobClose');
-
-  const openMenu  = () => { mobOverlay.classList.add('open');  document.body.style.overflow = 'hidden'; };
-  const closeMenu = () => { mobOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-
-  mobToggle  && mobToggle.addEventListener('click', openMenu);
-  mobClose   && mobClose.addEventListener('click', closeMenu);
-  mobOverlay && mobOverlay.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
-
-
-  /* ════════════════════════════════════════════
-     SMOOTH SCROLL  (anchor links)
+     SMOOTH SCROLL — anchor links
   ════════════════════════════════════════════ */
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function (e) {
@@ -103,16 +85,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ════════════════════════════════════════════
-     SCROLL REVEAL  — staggered fade-up
+     EXPANDABLE WORK ITEMS
+  ════════════════════════════════════════════ */
+  document.querySelectorAll('[data-expandable]').forEach(item => {
+    const header = item.querySelector('.work-item__header');
+    if (!header) return;
+
+    header.addEventListener('click', () => {
+      const wasExpanded = item.classList.contains('expanded');
+
+      // Close all siblings
+      item.closest('.work-list').querySelectorAll('.work-item.expanded').forEach(open => {
+        if (open !== item) open.classList.remove('expanded');
+      });
+
+      // Toggle current
+      item.classList.toggle('expanded', !wasExpanded);
+    });
+  });
+
+
+  /* ════════════════════════════════════════════
+     SCROLL REVEAL — staggered fade-up
   ════════════════════════════════════════════ */
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
