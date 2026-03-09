@@ -11,7 +11,7 @@
   --gray:    #777;
   --lt-gray: #BBB;
   --border:  #E0DFDC;
-  --accent:  #C33C3C;
+  --accent:  #032791;
   --frame:   #111;
 
   --f-heading: 'DM Sans';
@@ -77,7 +77,6 @@ button { cursor: none; border: none; background: none; }
   transition: width .3s var(--ease), height .3s var(--ease);
   will-change: left, top;
 }
-.cursor.big { width: 60px; height: 60px; }
 
 
 /* ═══════════════════════════════════════════════
@@ -117,7 +116,7 @@ button { cursor: none; border: none; background: none; }
 
 .site-nav__link {
   font-family: var(--f-body);
-  font-size: .7rem;
+  font-size: .75rem;
   font-weight: 400;
   letter-spacing: .04em;
   color: var(--fg);
@@ -244,7 +243,7 @@ button { cursor: none; border: none; background: none; }
 
 .hero__footer {
   font-family: var(--f-body);
-  font-size: .7rem;
+  font-size: .75rem;
   font-weight: 400;
   letter-spacing: .04em;
   color: var(--fg);
@@ -263,7 +262,7 @@ button { cursor: none; border: none; background: none; }
 
 .hero__nav-link {
   font-family: var(--f-gt-mono);
-  font-size: .7rem;
+  font-size: .8rem;
   font-weight: 400;
   letter-spacing: .04em;
   color: var(--fg);

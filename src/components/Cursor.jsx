@@ -27,23 +27,11 @@ export default function Cursor() {
     document.addEventListener('mouseenter', onEnter);
     tick();
 
-    const grow = () => el.classList.add('big');
-    const shrink = () => el.classList.remove('big');
-    const targets = document.querySelectorAll('a, button, .entry, .gallery__item, .fun-card, .contact-email');
-    targets.forEach((t) => {
-      t.addEventListener('mouseenter', grow);
-      t.addEventListener('mouseleave', shrink);
-    });
-
     return () => {
       cancelAnimationFrame(raf);
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseleave', onLeave);
       document.removeEventListener('mouseenter', onEnter);
-      targets.forEach((t) => {
-        t.removeEventListener('mouseenter', grow);
-        t.removeEventListener('mouseleave', shrink);
-      });
     };
   }, []);
 
