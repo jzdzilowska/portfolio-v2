@@ -18,6 +18,7 @@
   --f-serif:   'Playfair Display', Georgia, serif;
   --f-body:    'DM Sans';
   --f-mono:    'JetBrains Mono', 'SF Mono', monospace;
+  --f-gt-mono: 'GT America Mono', 'JetBrains Mono', 'SF Mono', monospace;
 
   --px: 6rem;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
@@ -114,14 +115,15 @@ button { cursor: none; border: none; background: none; }
 .site-nav__links {
   width: 100%;
   display: flex;
+  justify-content:space-between;
   gap: 2.25rem;
 }
 
 .site-nav__link {
-  font-family: var(--f-body);
-  font-size: .8rem;
+  font-family: var(--f-gt-mono);
+  font-size: .7rem;
   font-weight: 400;
-  letter-spacing: .01em;
+  letter-spacing: .04em;
   color: var(--fg);
   transition: color .3s ease;
 }
@@ -212,10 +214,10 @@ button { cursor: none; border: none; background: none; }
 
 .hero__heading {
   font-family: var(--f-heading);
-  font-weight: 800;
-  font-size: clamp(2.2rem, 5.8vw, 5.2rem);
-  line-height: 1.02;
-  letter-spacing: -.035em;
+  font-weight: 500;
+  font-size: clamp(4.3rem, 4.8vw, 3rem);
+  line-height: 0.85;
+  letter-spacing: -.045em;
   text-transform: uppercase;
   color: var(--fg);
 }
@@ -623,14 +625,14 @@ button { cursor: none; border: none; background: none; }
 .site-foot__bottom:last-child { border-right: none; }
 
 .site-foot__bottom span:first-child {
-  font-family: var(--f-mono);
+  font-family: var(--f-gt-mono);
   font-size: .5rem;
   letter-spacing: .12em;
   color: var(--lt-gray);
 }
 .site-foot__bottom span:last-child {
-  font-family: var(--f-heading);
-  font-weight: 700;
+  font-family: var(--f-gt-mono);
+  font-weight: 500;
   font-size: .55rem;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -647,7 +649,7 @@ button { cursor: none; border: none; background: none; }
 
 .site-colophon__copy,
 .site-colophon__rights {
-  font-family: var(--f-mono);
+  font-family: var(--f-gt-mono);
   font-size: .55rem;
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -655,7 +657,7 @@ button { cursor: none; border: none; background: none; }
 }
 
 .site-colophon__name {
-  font-family: var(--f-body);
+  font-family: var(--f-gt-mono);
   font-weight: 400;
   font-size: .75rem;
   letter-spacing: .03em;

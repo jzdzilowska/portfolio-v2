@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export default function Hero() {
   const [typed, setTyped] = useState('');
-  const word = 'Krakow';
+  const word = 'why if not beautiful?';
 
   useEffect(() => {
     const lines = document.querySelectorAll('.hero__line');
@@ -28,13 +28,11 @@ export default function Hero() {
         <h1 className="hero__heading">
           <span className="hero__line">JULIA</span>
           <span className="hero__line">ZDZILOWSKA</span>
+          <span className="hero__line">FULL-STACK</span>
+          <span className="hero__line">X UI/UX</span>
           <span className="hero__line">
-            - FROM{' '}
             <em className="hero__typed">{typed}</em>
           </span>
-          <span className="hero__line">FULL-STACK</span>
-          <span className="hero__line">& UI</span>
-
         </h1>
       </div>
 
