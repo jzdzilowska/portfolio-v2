@@ -66,8 +66,8 @@ button { cursor: none; border: none; background: none; }
 ═══════════════════════════════════════════════ */
 .cursor {
   position: fixed;
-  width: 32px;
-  height: 32px;
+  width: 10px;
+  height: 10px;
   background: #fff;
   border-radius: 50%;
   pointer-events: none;
