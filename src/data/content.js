@@ -1,12 +1,11 @@
 export const sections = [
-  { id: 'work', label: 'Work' },
+  { id: 'software', label: 'Software' },
   { id: 'research', label: 'Research' },
-  { id: 'fashion', label: '3D' },
   { id: 'fun', label: 'Fun' },
   { id: 'contact', label: 'Contact' },
 ];
 
-export const work = [
+export const software = [
   {
     num: '01',
     name: 'Personas & Storyboarding',
@@ -52,12 +51,6 @@ export const research = [
     tags: ['Topic', 'Method'],
     href: '#',
   },
-];
-
-export const fashion = [
-  { name: 'Project Title', desc: '3D fashion design', href: '#' },
-  { name: 'Project Title', desc: '3D fashion design', href: '#' },
-  { name: 'Project Title', desc: '3D fashion design', href: '#' },
 ];
 
 export const fun = [

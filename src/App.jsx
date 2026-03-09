@@ -7,7 +7,7 @@ import Gallery from './components/Gallery';
 import FunGrid from './components/FunGrid';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import { sections, work, research, fashion, fun, contactInfo } from './data/content';
+import { sections, software, research, fun, contactInfo } from './data/content';
 
 function Section({ id, num, title, className, children }) {
   return (
@@ -47,16 +47,12 @@ export default function App() {
       <main>
         <Hero />
 
-        <Section id="work" num="/001" title="Selected Work">
-          <EntryList entries={work} />
+        <Section id="software" num="/001" title="Selected Work">
+          <EntryList entries={software} />
         </Section>
 
         <Section id="research" num="/002" title="Research">
           <EntryList entries={research} />
-        </Section>
-
-        <Section id="fashion" num="/003" title="3D & Fashion">
-          <Gallery items={fashion} />
         </Section>
 
         <Section id="fun" num="/004" title="Fun Stuff">
