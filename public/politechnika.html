@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Politechnika Krakowska Responsive Redesign - Improving usability and accessibility">
+    <title>Politechnika Krakowska Redesign | Julia Zdzilowska</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">JZ</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="hero-content">
+            <div class="section-number" style="position: absolute; top: 20%; left: 10%; opacity: 0.3;">03</div>
+            <h1 class="hero-title" style="font-size: var(--font-size-5xl);">Politechnika Krakowska</h1>
+            <p class="hero-subtitle" style="font-size: var(--font-size-lg); text-transform: none;">
+                Responsive Redesign
+            </p>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-3xl">
+        <div class="container container-narrow">
+            <!-- Overview -->
+            <div class="mb-3xl">
+                <h2 style="color: var(--color-accent-green);">Overview</h2>
+                <p style="font-size: var(--font-size-lg);">
+                    The <a href="https://www.pk.edu.pl/index.php?lang=pl" target="_blank" rel="noopener"
+                        style="color: var(--color-accent-green);">Politechnika Krakowska</a>
+                    website serves as a critical hub for prospective students, researchers, and staff, yet its current
+                    design fails to meet modern usability and accessibility standards.
+                </p>
+                <p style="font-size: var(--font-size-lg);">
+                    It lacks intuitive navigation and visual cohesion, creating unnecessary friction for users.
+                    This project addresses these issues through a comprehensive responsive redesign.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Problems -->
+            <div class="mb-3xl">
+                <h2>Identified Problems</h2>
+                <p class="mb-xl">
+                    Screenshots below depict the site at different screen sizes. The following table highlights key
+                    issues:
+                </p>
+
+                <!-- Usability Issues -->
+                <div class="mb-xl"
+                    style="background-color: var(--color-off-white); padding: var(--space-xl); border-radius: var(--radius-md); border-left: 4px solid var(--color-accent-green);">
+                    <h4 style="color: var(--color-accent-green);">Usability Issues</h4>
+                    <ul
+                        style="margin-left: var(--space-lg); margin-top: var(--space-md); line-height: var(--line-height-relaxed);">
+                        <li><strong>Overwhelming Dropdown Menus:</strong> The submenus are cluttered with unrelated
+                            items, increasing cognitive load</li>
+                        <li><strong>Redundant Elements:</strong> Numerous navbars (all 4 of them) and the unnecessary,
+                            poorly-labeled accessibility toolbar located on the bottom of the site add confusion</li>
+                        <li><strong>Poor Visibility of Critical Features:</strong> Interactive elements in the header
+                            blend into static logos</li>
+                        <li><strong>Poor Navbar Positioning:</strong> Users must scroll up to access the primary menu
+                        </li>
+                        <li><strong>Inconsistent Design Language:</strong> Disjointed color schemes and buttons lacking
+                            clear visual priority make all actions seemingly equally important for first-time users</li>
+                        <li><strong>Overloaded Homepage:</strong> Too much text and visuals bury key actions</li>
+                        <li><strong>Non-Intuitive Navigation:</strong> Users are required to click through multiple
+                            pages to find relevant information, with the sheer amount of options available within each
+                            navbar either overlapping between the menus or not relating to each other within the same
+                            one</li>
+                        <li><strong>Generic Aesthetic:</strong> The text-heavy design fails to leave an impression</li>
+                        <li><strong>Poor Spatial Awareness:</strong> Users struggle to retrace steps with the amount of
+                            inconsistent visual cues</li>
+                    </ul>
+                </div>
+
+                <!-- Accessibility Issues -->
+                <div class="mb-xl"
+                    style="background-color: var(--color-off-white); padding: var(--space-xl); border-radius: var(--radius-md); border-left: 4px solid var(--color-accent-orange);">
+                    <h4 style="color: var(--color-accent-orange);">Accessibility Issues</h4>
+                    <ul
+                        style="margin-left: var(--space-lg); margin-top: var(--space-md); line-height: var(--line-height-relaxed);">
+                        <li><strong>Low Contrast Ratios:</strong> Most text fails WCAG standards. Most text shares
+                            similar shades of blue, blending into the background</li>
+                        <li><strong>Illegible Text:</strong> Small font sizes and poor line spacing make reading
+                            difficult</li>
+                        <li><strong>Non-Descriptive Links:</strong> Links lack context and aren't descriptive</li>
+                        <li><strong>Unlabeled Interactive Elements:</strong> Icons lack alt text and/or labels</li>
+                        <li><strong>Unlabeled Images:</strong> Nearly all images lack alt text (or are otherwise not
+                            descriptive)</li>
+                    </ul>
+                </div>
+
+                <!-- Responsive Issues -->
+                <div
+                    style="background-color: var(--color-off-white); padding: var(--space-xl); border-radius: var(--radius-md); border-left: 4px solid var(--color-accent-pink);">
+                    <h4 style="color: var(--color-accent-pink);">Responsive Design Issues</h4>
+                    <ul
+                        style="margin-left: var(--space-lg); margin-top: var(--space-md); line-height: var(--line-height-relaxed);">
+                        <li><strong>Non-Responsive Components:</strong> Critical content is cut off on narrow screens
+                            and viewports different than desktop</li>
+                        <li><strong>Poor Mobile Experience:</strong> Navigation and content don't adapt properly to
+                            smaller screens</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Visual Redesign -->
+            <div class="mb-3xl">
+                <h2>Visual Redesign Approach</h2>
+                <p>
+                    My redesign enhances the site's visual appeal and usability, featuring a clean, modern aesthetic
+                    with intuitive navigation and improved accessibility.
+                </p>
+                <p>
+                    First, before addressing all the issues mentioned in the problems section through code and ensuring
+                    responsiveness across all screen sizes, I combined a cohesive visual identity brief reflecting the
+                    university's architectural focus. This included modernized logos, custom typography, and a color
+                    palette rooted in Politechnika's heritage.
+                </p>
+                <p>
+                    Second, I restructured the site's layout through mockups in Figma, incorporating this aesthetic.
+                    The redesign features a simplified, user-friendly navigation system with clear CTAs and intuitive
+                    information architecture.
+                </p>
+            </div>
+
+            <!-- Figma Link -->
+            <div class="mb-3xl"
+                style="text-align: center; background-color: var(--color-off-white); padding: var(--space-2xl); border-radius: var(--radius-md);">
+                <h4>View Full Figma Project</h4>
+                <p style="margin-top: var(--space-md); margin-bottom: var(--space-lg);">
+                    Explore the complete redesign with interactive prototypes and detailed design specifications.
+                </p>
+                <a href="https://www.figma.com/design/CpLgXB7r4Q8IDxfhJ1K574/Politechnika-Krakowska?node-id=0-1&t=5Qkv2zLb520IxafI-1"
+                    target="_blank" rel="noopener" class="btn btn-primary">
+                    Open in Figma →
+                </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Key Improvements -->
+            <div class="mb-3xl">
+                <h2>Key Improvements</h2>
+                <div class="grid grid-2 gap-lg">
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-green);">Navigation</h5>
+                        <p style="font-size: var(--font-size-sm);">Simplified menu structure with clear hierarchy and
+                            consolidated options</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-green);">Accessibility</h5>
+                        <p style="font-size: var(--font-size-sm);">WCAG-compliant contrast ratios, descriptive labels,
+                            and proper alt text</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-green);">Visual Design</h5>
+                        <p style="font-size: var(--font-size-sm);">Modern, cohesive aesthetic reflecting the
+                            university's architectural heritage</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-green);">Responsiveness</h5>
+                        <p style="font-size: var(--font-size-sm);">Fully responsive design that works seamlessly across
+                            all devices</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Back to Projects -->
+            <div style="text-align: center; margin-top: var(--space-3xl);">
+                <a href="index.html#projects" class="btn btn-outline">← Back to Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Made with ♥ by <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener"
+                        class="footer-link">@jzdzilowska</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
