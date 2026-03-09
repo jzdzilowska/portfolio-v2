@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import Pitch from './components/Pitch';
 import EntryList from './components/EntryList';
 import Gallery from './components/Gallery';
 import FunGrid from './components/FunGrid';
@@ -46,6 +47,7 @@ export default function App() {
 
       <main>
         <Hero />
+        <Pitch />
 
         <Section id="software" num="/001" title="Selected Work">
           <EntryList entries={software} />
