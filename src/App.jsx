@@ -41,8 +41,9 @@ export default function App() {
   }, []);
 
   return (
+    <>
+    <Cursor />
     <div className="frame">
-      <Cursor />
       <Nav sections={sections} />
 
       <main>
@@ -68,5 +69,6 @@ export default function App() {
 
       <Footer />
     </div>
+    </>
   );
 }
