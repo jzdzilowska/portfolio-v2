@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import Loader from './components/Loader';
 import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
@@ -23,6 +24,9 @@ function Section({ id, num, title, className, children }) {
 }
 
 export default function App() {
+  const [loading, setLoading] = useState(true);
+  const handleLoaded = useCallback(() => setLoading(false), []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -42,6 +46,7 @@ export default function App() {
 
   return (
     <>
+    {loading && <Loader onDone={handleLoaded} />}
     <Cursor />
     <div className="frame">
       <Nav sections={sections} />

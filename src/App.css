@@ -2,8 +2,6 @@
    JULIA ZDZILOWSKA — PORTFOLIO
 ═══════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400&display=swap');
-
 /* ─── VARIABLES ─── */
 :root {
   --bg:      #ffffff;
@@ -47,6 +45,79 @@ img  { max-width: 100%; display: block; }
 button { border: none; background: none; }
 
 ::selection { background: var(--accent); color: #fff; }
+
+
+/* ═══════════════════════════════════════════════
+   LOADER
+═══════════════════════════════════════════════ */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background-color: rgba(242, 242, 242, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  will-change: transform;
+  transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.loader--exit {
+  transform: translateY(-100%);
+}
+
+.loader__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'SF Mono', 'JetBrains Mono', 'Courier New', monospace;
+  font-size: .55rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #2a2a2a;
+}
+
+.loader__row {
+  display: block;
+}
+
+.loader__row--solo {
+  align-self: center;
+}
+
+.loader__row--right {
+  align-self: center;
+}
+
+.loader__table {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 1.5rem;
+  row-gap: .15rem;
+}
+
+.loader__key {
+  text-align: right;
+  color: #2a2a2a;
+}
+
+.loader__val {
+  text-align: left;
+  color: #2a2a2a;
+}
+
+.loader__brand {
+  margin-top: .75rem;
+  font-size: .75rem;
+  letter-spacing: .06em;
+  color: #2a2a2a;
+}
+
+.loader__cursor {
+  font-weight: 400;
+}
 
 
 /* ═══════════════════════════════════════════════
