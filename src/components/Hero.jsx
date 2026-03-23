@@ -1,9 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 const words = ['beautiful?', 'scalable?', 'efficient?', 'intuitive?', 'accessible?'];
 
 export default function Hero() {
   const [typed, setTyped] = useState('');
+  const bodyRef = useRef(null);
 
   const startCycle = useCallback(() => {
     let cancelled = false;
@@ -66,17 +67,34 @@ export default function Hero() {
     };
   }, [startCycle]);
 
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      const vh = window.innerHeight;
+      const progress = Math.min(1, window.scrollY / (vh * 0.5));
+      const blur = progress * 12;
+      const opacity = 1 - progress;
+      el.style.filter = `blur(${blur}px)`;
+      el.style.opacity = opacity;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <section className="hero">
-      <div className="hero__body">
+      <div className="hero__body" ref={bodyRef}>
         <h1 className="hero__heading">
-          <span className="hero__line">JULIA</span>
-          <span className="hero__line">ZDZILOWSKA</span>
-          <span className="hero__line">FULL-STACK</span>
-          <span className="hero__line">& UI/UX //</span>
+        <span className="hero__line">(*)</span>
+        <span className="hero__line">Julia Zdzilowska</span>
+          <span className="hero__line">Full-Stack & UI/UX</span>
           <span className="hero__line">
-            why if not <em className="hero__typed">{typed}</em>
+            why, if not <em className="hero__typed">{typed}</em>
           </span>
+          <span className="hero__line hero__line--small">(scroll down)</span>
         </h1>
       </div>
 
