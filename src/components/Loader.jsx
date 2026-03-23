@@ -17,7 +17,7 @@ export default function Loader({ onDone }) {
         <span className="loader__row loader__row--right">KRK → BOS</span>
         <div className="loader__table">
           <span className="loader__key">FIELD</span>
-          <span className="loader__val">FULL-STACK DEV / BRANDING</span>
+          <span className="loader__val">FULL-STACK DEV / UI/UX</span>
           <span className="loader__key">TYPE</span>
           <span className="loader__val">PORTFOLIO</span>
           <span className="loader__key">YEAR</span>

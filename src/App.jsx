@@ -48,7 +48,7 @@ export default function App() {
     <>
     {loading && <Loader onDone={handleLoaded} />}
     <Cursor />
-    <div className="frame">
+    <div className={`frame${loading ? ' frame--blurred' : ''}`}>
       <Nav sections={sections} />
 
       <main>
