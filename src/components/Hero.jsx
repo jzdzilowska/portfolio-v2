@@ -1,0 +1,89 @@
+import { useEffect, useState, useCallback } from 'react';
+
+const words = ['beautiful?', 'scalable?', 'efficient?', 'intuitive?', 'accessible?'];
+
+export default function Hero() {
+  const [typed, setTyped] = useState('');
+
+  const startCycle = useCallback(() => {
+    let cancelled = false;
+
+    const typeWord = (word, onDone) => {
+      let i = 0;
+      const step = () => {
+        if (cancelled) return;
+        if (i <= word.length) {
+          setTyped(word.slice(0, i));
+          i++;
+          setTimeout(step, 110);
+        } else {
+          setTimeout(onDone, 1800);
+        }
+      };
+      step();
+    };
+
+    const deleteWord = (word, onDone) => {
+      let i = word.length;
+      const step = () => {
+        if (cancelled) return;
+        if (i >= 0) {
+          setTyped(word.slice(0, i));
+          i--;
+          setTimeout(step, 60);
+        } else {
+          setTimeout(onDone, 350);
+        }
+      };
+      step();
+    };
+
+    const cycle = (index) => {
+      if (cancelled) return;
+      const word = words[index % words.length];
+      typeWord(word, () => deleteWord(word, () => cycle(index + 1)));
+    };
+
+    cycle(0);
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    const lines = document.querySelectorAll('.hero__line');
+    const timeouts = [];
+
+    lines.forEach((line, i) => {
+      timeouts.push(setTimeout(() => line.classList.add('visible'), 300 + i * 140));
+    });
+
+    const startDelay = 300 + lines.length * 140 + 400;
+    let cancelCycle;
+    timeouts.push(setTimeout(() => { cancelCycle = startCycle(); }, startDelay));
+
+    return () => {
+      timeouts.forEach(clearTimeout);
+      if (cancelCycle) cancelCycle();
+    };
+  }, [startCycle]);
+
+  return (
+    <section className="hero">
+      <div className="hero__body">
+        <h1 className="hero__heading">
+          <span className="hero__line">JULIA</span>
+          <span className="hero__line">ZDZILOWSKA</span>
+          <span className="hero__line">FULL-STACK</span>
+          <span className="hero__line">& UI/UX //</span>
+          <span className="hero__line">
+            why if not <em className="hero__typed">{typed}</em>
+          </span>
+        </h1>
+      </div>
+
+      <div className="hero__footer">
+        <p>Based in Providence, RI</p>
+        <p>Available Worldwide</p>
+      </div>
+    </section>
+  );
+}
