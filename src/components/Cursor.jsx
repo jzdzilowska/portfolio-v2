@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
 
+const MAGNETIC_SELECTOR = 'a, button, .js-link, [role="button"]';
+const STRENGTH = 0.4;
+
 export default function Cursor() {
   const box = useRef(null);
   const root = useRef(null);
@@ -14,19 +17,37 @@ export default function Cursor() {
 
     document.documentElement.classList.add('has-custom-cursor');
 
+    let activeMagnetic = null;
+
     const onMove = (e) => {
       boxEl.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+
+      if (activeMagnetic) {
+        const rect = activeMagnetic.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) * STRENGTH;
+        const dy = (e.clientY - cy) * STRENGTH;
+        activeMagnetic.style.transform = `translate(${dx}px, ${dy}px)`;
+      }
     };
 
     const onOver = (e) => {
-      if (e.target.closest('a, button, .js-link, [role="button"]')) {
+      const target = e.target.closest(MAGNETIC_SELECTOR);
+      if (target) {
         el.classList.add('is-link-hovered');
+        activeMagnetic = target;
+        target.style.transition = 'transform 0.4s cubic-bezier(0.33, 1, 0.68, 1)';
       }
     };
 
     const onOut = (e) => {
-      if (e.target.closest('a, button, .js-link, [role="button"]')) {
+      const target = e.target.closest(MAGNETIC_SELECTOR);
+      if (target) {
         el.classList.remove('is-link-hovered');
+        target.style.transition = 'transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)';
+        target.style.transform = 'translate(0, 0)';
+        if (activeMagnetic === target) activeMagnetic = null;
       }
     };
 
