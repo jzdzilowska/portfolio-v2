@@ -43,24 +43,33 @@ export default function Nav({ sections, onAbout }) {
     document.body.style.overflow = '';
   };
 
+  const left = sections.filter((s) => s.id === 'work' || s.id === 'research');
+  const right = sections.filter((s) => s.id === 'about' || s.id === 'contact');
+
+  const renderGroup = (group) =>
+    group.map((s, i) => (
+      <span key={s.id} className="site-nav__item">
+        {i > 0 && <span className="site-nav__sep">//</span>}
+        <a
+          href={`#${s.id}`}
+          className={`site-nav__link${active === s.id ? ' active' : ''}`}
+          onClick={(e) => {
+            e.preventDefault();
+            if (s.id === 'about') { onAbout?.(); return; }
+            scrollTo(e, s.id);
+          }}
+        >
+          {s.label}
+        </a>
+      </span>
+    ));
+
   return (
     <>
       <header className="site-nav">
         <nav className="site-nav__links">
-          {sections.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className={`site-nav__link${active === s.id ? ' active' : ''}`}
-              onClick={(e) => {
-                e.preventDefault();
-                if (s.id === 'about') { onAbout?.(); return; }
-                scrollTo(e, s.id);
-              }}
-            >
-              {s.label}
-            </a>
-          ))}
+          <div className="site-nav__group">{renderGroup(left)}</div>
+          <div className="site-nav__group">{renderGroup(right)}</div>
         </nav>
         <button className="site-nav__toggle" onClick={openMenu} aria-label="Menu">
           <span /><span />
