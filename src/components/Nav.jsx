@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-export default function Nav({ sections }) {
+export default function Nav({ sections, onAbout }) {
   const [active, setActive] = useState(sections[0]?.id || '');
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -52,7 +52,11 @@ export default function Nav({ sections }) {
               key={s.id}
               href={`#${s.id}`}
               className={`site-nav__link${active === s.id ? ' active' : ''}`}
-              onClick={(e) => scrollTo(e, s.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                if (s.id === 'about') { onAbout?.(); return; }
+                scrollTo(e, s.id);
+              }}
             >
               {s.label}
             </a>
@@ -73,7 +77,11 @@ export default function Nav({ sections }) {
               key={s.id}
               href={`#${s.id}`}
               className="mob-menu__link"
-              onClick={(e) => scrollTo(e, s.id)}
+              onClick={(e) => {
+                e.preventDefault();
+                if (s.id === 'about') { closeMenu(); onAbout?.(); return; }
+                scrollTo(e, s.id);
+              }}
             >
               {s.label}
             </a>

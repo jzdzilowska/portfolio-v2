@@ -2,7 +2,7 @@ export const sections = [
   { id: 'work', label: 'Work' },
   { id: 'research', label: 'Research' },
   { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'contact', label: 'Find me' },
 ];
 
 export const software = [

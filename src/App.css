@@ -38,6 +38,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'kalice';
+  src: url('/fonts/Kalice Trials/KaliceTrial-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ─── VARIABLES ─── */
 :root {
   --bg:      #fcfcfc;
@@ -121,8 +129,16 @@ a    { color: inherit; text-decoration: none; }
   --b-cursor__size: 18px;
 }
 
+.about-open .b-cursor.is-link-hovered {
+  --b-cursor__size: 8px;
+}
+
 .b-cursor.is-link-hovered .b-cursor__item--small {
   box-shadow: 0 0 0 1px var(--b-cursor__color) inset;
+}
+
+.about-open .b-cursor.is-link-hovered .b-cursor__item--small {
+  box-shadow: 0 0 0 calc(var(--b-cursor__size) / 2) var(--b-cursor__color) inset;
 }
 
 a, button, [role="button"] {
@@ -132,6 +148,11 @@ a, button, [role="button"] {
 
 a:hover, button:hover, [role="button"]:hover {
   filter: blur(2px);
+}
+
+.about-overlay a:hover,
+.about-overlay button:hover {
+  filter: none;
 }
 
 .b-cursor.is-clicked {
@@ -906,6 +927,83 @@ button { border: none; background: none; }
   line-height: 16.5px;
   text-transform: uppercase;
   color: var(--fg);
+}
+
+
+/* ═══════════════════════════════════════════════
+   ABOUT OVERLAY
+═══════════════════════════════════════════════ */
+.about-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease);
+  margin-top: -70px;
+}
+
+.about-overlay--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.about-overlay__content {
+  position: relative;
+  max-width: 600px;
+  width: 90%;
+  padding: 3.5rem 3rem;
+  text-align: left;
+}
+
+.about-overlay__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size:0.8rem;
+  color: var(--fg);
+  padding: .5rem;
+}
+
+.about-overlay__heading {
+  font-family: var(--f-gt-mono);
+  font-size: var(--f-gt-mono-size);
+  font-weight: 500;
+  letter-spacing: .04em;
+  line-height: 16.5px;
+  text-transform: uppercase;
+  color: inherit;
+  margin-bottom: 1.2rem;
+}
+
+.about-overlay__text {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--fg);
+  font-style: normal;
+}
+
+.about-overlay__img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  pointer-events: none;
+  z-index: -1;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  will-change: transform;
+}
+
+.about-overlay--open .about-overlay__img {
+  opacity: 1;
 }
 
 
