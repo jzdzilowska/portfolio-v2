@@ -94,12 +94,12 @@ export default function Hero() {
           <span className="hero__line">
             why, if not <em className="hero__typed">{typed}</em>
           </span>
-          <span className="hero__line hero__line--small">(scroll down)</span>
         </h1>
       </div>
 
       <div className="hero__footer">
         <p>Based in Providence, RI</p>
+        <p>(Scroll Down)</p>
         <p>Available Worldwide</p>
       </div>
     </section>

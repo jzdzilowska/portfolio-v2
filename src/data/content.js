@@ -7,6 +7,13 @@ export const sections = [
 
 export const software = [
   {
+    num: '00',
+    name: 'SAUTÉ',
+    desc: 'AI-powered meal planning platform with smart pantry, leftover threading, and one-tap checkout',
+    tags: ['React', 'Vision AI', 'Full-Stack', 'Product Design'],
+    href: '/saute.html',
+  },
+  {
     num: '01',
     name: 'Personas & Storyboarding',
     desc: 'User research case study — Mail Room Kiosk at Brown University',

@@ -8,6 +8,7 @@ import EntryList from './components/EntryList';
 import Gallery from './components/Gallery';
 import FunGrid from './components/FunGrid';
 import Contact from './components/Contact';
+import CTA from './components/CTA';
 import Footer from './components/Footer';
 import { sections, software, research, fun, contactInfo } from './data/content';
 
@@ -66,6 +67,8 @@ export default function App() {
         <Section id="fun" num="/004" title="Fun Stuff">
           <FunGrid items={fun} />
         </Section>
+
+        <CTA />
 
         <Section id="contact" num="/005" title="Get in Touch" className="sec--last">
           <Contact info={contactInfo} />
