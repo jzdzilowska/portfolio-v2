@@ -1,8 +1,9 @@
-import { useRef, useEffect, useCallback } from 'react';
+import { useRef, useEffect, useCallback, useState } from 'react';
 
 export default function AboutOverlay({ open, onClose }) {
   const imgRef = useRef(null);
   const overlayRef = useRef(null);
+  const [resumeHovered, setResumeHovered] = useState(false);
   const mouse = useRef({ x: 0, y: 0 });
   const pos = useRef({ x: 0, y: 0 });
   const vel = useRef({ x: 0, y: 0 });
@@ -70,7 +71,7 @@ export default function AboutOverlay({ open, onClose }) {
         ref={imgRef}
         src="/images/about-photo.png"
         alt=""
-        className="about-overlay__img"
+        className={`about-overlay__img${resumeHovered ? ' about-overlay__img--hidden' : ''}`}
       />
 
       <div className="about-overlay__content" onClick={(e) => e.stopPropagation()}>
@@ -79,8 +80,18 @@ export default function AboutOverlay({ open, onClose }) {
         </button>
         <h2 className="about-overlay__heading">DEVELOPER & DESIGNER</h2>
         <p className="about-overlay__text">
-          Hey, I'm Julia - full-stack dev & UI/UX designer based in Providence, RI, and founder of an independent digital studio. I design and build production-ready digital products, pairing scalable engineering with intentional design to help founders and brands bring ideas from concept to launch. I'm a minimalism apologist and a white space lover.
+          Hey, I'm Julia - full-stack dev & brand designer based in Providence, RI, and founder of an independent digital studio. I design and build production-ready digital products, pairing thoughtful engineering with intentional, detail-drivendesign to help founders and brands bring ideas from concept to launch. I'm a minimalism apologist and a white space lover.
         </p>
+        <a
+          href="/Julia-Zdzilowska-Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="about-overlay__resume"
+          onMouseEnter={() => setResumeHovered(true)}
+          onMouseLeave={() => setResumeHovered(false)}
+        >
+          Resume ↗
+        </a>
       </div>
     </div>
   );

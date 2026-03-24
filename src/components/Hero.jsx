@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 
-const words = ['beautiful?', 'scalable?', 'efficient?', 'intuitive?', 'accessible?'];
+const words = ['beautiful?', 'scalable?', 'efficient?', 'intuitive?', 'intentional?', 'timeless?', 'accessible?'];
 
 export default function Hero() {
   const [typed, setTyped] = useState('');
@@ -90,7 +90,7 @@ export default function Hero() {
         <h1 className="hero__heading">
         <span className="hero__line">(*)</span>
         <span className="hero__line">Julia Zdzilowska</span>
-          <span className="hero__line">Full-Stack & UI/UX</span>
+          <span className="hero__line">Full-Stack & Branding</span>
           <span className="hero__line">
             why, if not <em className="hero__typed">{typed}</em>
           </span>
