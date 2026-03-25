@@ -22,20 +22,13 @@ export const software = [
   },
   {
     num: '02',
-    name: 'Zest UI Redesign',
-    desc: 'Onboarding flow redesign for an online gifting platform',
-    tags: ['UI/UX Design', 'Wireframing', 'Prototyping'],
-    href: '/zest.html',
-  },
-  {
-    num: '03',
     name: 'Politechnika Krakowska',
     desc: 'Responsive redesign with WCAG accessibility compliance',
     tags: ['Responsive Design', 'Accessibility', 'Figma'],
     href: '/politechnika.html',
   },
   {
-    num: '04',
+    num: '03',
     name: 'Pinterest Accessibility',
     desc: 'Accessibility evaluation and redesign of dropdown components',
     tags: ['Accessibility', 'Components', 'Interaction'],

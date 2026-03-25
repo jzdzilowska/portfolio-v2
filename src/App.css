@@ -4,45 +4,9 @@
 
 @font-face {
   font-family: 'neuemontreal';
-  src: url('/fonts/PPNeueMontreal-Book.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'neuemontreal';
   src: url('/fonts/PPNeueMontreal-Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'neuemontreal';
-  src: url('/fonts/PPNeueMontreal-Bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'neuemontreal';
-  src: url('/fonts/PPNeueMontreal-Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'neuemontreal';
-  src: url('/fonts/PPNeueMontreal-Thin.otf') format('opentype');
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'kalice';
-  src: url('/fonts/Kalice Trials/KaliceTrial-Italic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -242,11 +206,17 @@ button { border: none; background: none; }
    FRAME
 ═══════════════════════════════════════════════ */
 .frame {
-  background: transparent;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
   min-height: 100vh;
-  position: relative;
   overflow-x: clip;
+  z-index: 1;
   transition: filter 0.8s ease;
+}
+
+.scroll-spacer {
+  height: 100vh;
 }
 
 .frame--blurred {
@@ -913,6 +883,156 @@ button { border: none; background: none; }
 
 
 /* ═══════════════════════════════════════════════
+   OUTRO — scroll-driven slide-up overlay
+═══════════════════════════════════════════════ */
+.outro {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.outro--visible {
+  pointer-events: auto;
+}
+
+.outro__bg {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.outro__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.outro__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: .35rem;
+}
+
+.outro__asterisk {
+  font-family: var(--f-body);
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: var(--fg);
+  margin-bottom: .5rem;
+}
+
+.outro__heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .1em;
+  font-family: var(--f-heading);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+  line-height: 1.2;
+  letter-spacing: -.03em;
+  color: var(--fg);
+}
+
+.outro__heading--italic {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+
+.outro__sub {
+  margin-top: 1.5rem;
+  font-family: var(--f-body);
+  font-size: .75rem;
+  letter-spacing: .04em;
+  line-height: 1.6;
+  color: var(--fg);
+}
+
+.outro__dot {
+  margin: 3rem 0;
+  font-size: .45rem;
+  color: var(--fg);
+}
+
+.outro__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.outro__footer-top {
+  display: flex;
+  gap: 6rem;
+  padding: 1.75rem var(--px);
+  border-top: 1px solid var(--border);
+}
+
+.outro__footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: .25rem;
+}
+
+.outro__footer-label {
+  font-family: var(--f-body);
+  font-size: .65rem;
+  font-weight: 500;
+  letter-spacing: .02em;
+  color: var(--fg);
+  margin-bottom: .15rem;
+}
+
+.outro__footer-val {
+  font-family: var(--f-body);
+  font-size: .65rem;
+  font-weight: 400;
+  letter-spacing: .01em;
+  color: var(--fg);
+  transition: opacity .3s ease;
+}
+.outro__footer-val:hover {
+  opacity: .45;
+}
+
+.outro__footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1.25rem var(--px);
+  border-top: 1px solid var(--border);
+}
+
+.outro__footer-small {
+  font-family: var(--f-body);
+  font-size: .6rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  color: var(--fg);
+  line-height: 1.4;
+}
+
+.outro__footer-right {
+  text-align: right;
+}
+
+
+/* ═══════════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════════ */
 .site-foot {
@@ -1112,6 +1232,11 @@ button { border: none; background: none; }
 
   .contact-row { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
   .contact-links { flex-wrap: wrap; gap: 1rem; }
+
+  .outro__footer-top { flex-direction: column; gap: 1.25rem; }
+  .outro__footer-bottom { flex-direction: column; gap: .75rem; align-items: flex-start; }
+  .outro__footer-right { text-align: left; }
+  .outro__heading { font-size: clamp(1.3rem, 6vw, 2rem); }
 
   .site-foot__links { gap: 1.5rem; flex-wrap: wrap; }
 }
