@@ -93,4 +93,6 @@ export default function AboutOverlay({ open, onClose }) {
           Resume ↗
         </a>
       </div>
-  
+    </div>
+  );
+}

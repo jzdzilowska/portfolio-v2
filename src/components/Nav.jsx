@@ -76,4 +76,27 @@ export default function Nav({ sections, onAbout }) {
         </button>
       </header>
 
-      <div 
+      <div className={`mob-menu${menuOpen ? ' open' : ''}`}>
+        <button className="mob-menu__close" onClick={closeMenu} aria-label="Close menu">
+          ✕
+        </button>
+        <nav className="mob-menu__links">
+          {sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className="mob-menu__link"
+              onClick={(e) => {
+                e.preventDefault();
+                if (s.id === 'about') { closeMenu(); onAbout?.(); return; }
+                scrollTo(e, s.id);
+              }}
+            >
+              {s.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+    </>
+  );
+}
