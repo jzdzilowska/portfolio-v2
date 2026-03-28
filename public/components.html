@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pinterest Accessibility - Dropdown menu accessibility evaluation and redesign">
+    <title>Pinterest Accessibility | Julia Zdzilowska</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">JZ</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="hero-content">
+            <div class="section-number" style="position: absolute; top: 20%; left: 10%; opacity: 0.3;">04</div>
+            <h1 class="hero-title" style="font-size: var(--font-size-5xl);">Pinterest Accessibility</h1>
+            <p class="hero-subtitle" style="font-size: var(--font-size-lg); text-transform: none;">
+                Dropdown Menus: An Accessibility Evaluation
+            </p>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="py-3xl">
+        <div class="container container-narrow">
+            <!-- Introduction -->
+            <div class="mb-3xl">
+                <h2 style="color: var(--color-accent-blue);">Project Focus</h2>
+                <p style="font-size: var(--font-size-lg);">
+                    The case study below focuses on the accessibility of dropdown menus, aiming to improve them for
+                    all users, including those using keyboard, mouse, touchscreen, or screen readers.
+                </p>
+                <p style="font-size: var(--font-size-lg);">
+                    By evaluating—and potentially reworking—current implementations, the goal is to enhance efficiency
+                    and accessibility of dropdowns without sacrificing their functionality.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Current Implementation Analysis -->
+            <div class="mb-3xl">
+                <h2>Current Implementation</h2>
+                <p class="mb-xl">
+                    Analysis of Pinterest's existing dropdown menu system revealed several areas for improvement:
+                </p>
+                <div class="grid grid-2 gap-lg">
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-blue);">Keyboard Navigation</h5>
+                        <p style="font-size: var(--font-size-sm);">Limited keyboard support for navigating between
+                            boards and sections</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-blue);">Visual Feedback</h5>
+                        <p style="font-size: var(--font-size-sm);">Unclear distinction between selected and unselected
+                            states</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-blue);">Navigation Flow</h5>
+                        <p style="font-size: var(--font-size-sm);">Inefficient process for switching between boards</p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-off-white); padding: var(--space-lg); border-radius: var(--radius-md);">
+                        <h5 style="color: var(--color-accent-blue);">Learnability</h5>
+                        <p style="font-size: var(--font-size-sm);">Users must remember previous selections without clear
+                            visual cues</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- State Models -->
+            <div class="mb-3xl">
+                <h2>State Models</h2>
+                <p class="mb-xl">
+                    Comparison of original and revised state models for the dropdown interaction:
+                </p>
+                <div class="grid grid-2 gap-lg">
+                    <div
+                        style="background-color: var(--color-light-gray); padding: var(--space-xl); border-radius: var(--radius-md);">
+                        <h5 style="text-align: center; margin-bottom: var(--space-md);">Original State Model</h5>
+                        <p
+                            style="font-size: var(--font-size-sm); text-align: center; color: var(--color-text-secondary); font-style: italic;">
+                            [State diagram would be displayed here]
+                        </p>
+                    </div>
+                    <div
+                        style="background-color: var(--color-light-gray); padding: var(--space-xl); border-radius: var(--radius-md);">
+                        <h5 style="text-align: center; margin-bottom: var(--space-md);">Revised State Model</h5>
+                        <p
+                            style="font-size: var(--font-size-sm); text-align: center; color: var(--color-text-secondary); font-style: italic;">
+                            [State diagram would be displayed here]
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Component Redesign -->
+            <div class="mb-3xl">
+                <h2>Component Redesign</h2>
+                <p class="mb-xl">
+                    Pinterest's redesigned board and section selection dropdown. The new layout is more intuitive,
+                    with a clear visual distinction between selected and unselected states, and a more efficient
+                    navigation flow.
+                </p>
+
+                <div class="mb-xl"
+                    style="background-color: var(--color-off-white); padding: var(--space-xl); border-radius: var(--radius-md);">
+                    <h4>Key Improvements</h4>
+                    <ul
+                        style="margin-left: var(--space-lg); margin-top: var(--space-md); line-height: var(--line-height-relaxed);">
+                        <li><strong>Side-by-Side Layout:</strong> The section list now opens to the right of the board
+                            list, making it easier for users to understand which board they've chosen</li>
+                        <li><strong>Improved Efficiency:</strong> Switching to a different board (or displaying its
+                            sections) only requires clicking on it within the left list, instead of navigating back to
+                            the all-boards list</li>
+                        <li><strong>Visual Clarity:</strong> Previously chosen board has a light grey background, and a
+                            hovered-over board/section has a medium gray background</li>
+                        <li><strong>Enhanced Learnability:</strong> No need to remember the previous selection—it's
+                            always visible</li>
+                        <li><strong>Keyboard Navigation:</strong> Users can now navigate through sections with up/down
+                            arrows, open/close sections with right/left arrows, or progress beyond the chosen board's
+                            sections into those of the subsequent board in the main list with tab</li>
+                    </ul>
+                </div>
+
+                <div
+                    style="background-color: var(--color-light-gray); padding: var(--space-2xl); border-radius: var(--radius-md); text-align: center;">
+                    <p style="color: var(--color-text-secondary); font-style: italic;">
+                        [Redesigned component mockup would be displayed here]
+                    </p>
+                </div>
+
+                <div style="margin-top: var(--space-xl); text-align: center;">
+                    <p style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">
+                        View the full Figma prototype:
+                        <a href="https://www.figma.com/design/EGfjC7WAUvWc1lAQ2wReQO/Pinterest-Board-Dropdown-Redesign?node-id=0-1&t=lOlgjueJEDGqFipS-1"
+                            target="_blank" rel="noopener" style="color: var(--color-accent-blue);">
+                            Pinterest Board Dropdown Redesign
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Reflection -->
+            <div class="mb-3xl">
+                <h2>Reflection</h2>
+                <p>
+                    This redesign prioritizes desktop users (whether keyboard or mouse), as the side-by-side layout
+                    couldn't be implemented on mobile. Future iterations would explore mobile-optimized solutions
+                    that maintain the improved accessibility and efficiency.
+                </p>
+                <p>
+                    The focus on keyboard navigation and clear visual feedback demonstrates how thoughtful component
+                    design can significantly improve the experience for users with diverse needs and interaction
+                    preferences.
+                </p>
+            </div>
+
+            <!-- Back to Projects -->
+            <div style="text-align: center; margin-top: var(--space-3xl);">
+                <a href="index.html#projects" class="btn btn-outline">← Back to Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>Made with ♥ by <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener"
+                        class="footer-link">@jzdzilowska</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
