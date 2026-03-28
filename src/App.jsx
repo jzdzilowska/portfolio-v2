@@ -3,6 +3,7 @@ import Loader from './components/Loader';
 import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
+import ProjectStack from './components/ProjectStack';
 import Outro from './components/Outro';
 import AboutOverlay from './components/AboutOverlay';
 import { sections } from './data/content';
@@ -25,6 +26,7 @@ export default function App() {
         <Hero />
       </main>
     </div>
+    <ProjectStack />
     <div className="scroll-spacer" />
     <Outro />
     <AboutOverlay open={aboutOpen} onClose={() => setAboutOpen(false)} />

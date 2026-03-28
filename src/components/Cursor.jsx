@@ -36,8 +36,10 @@ export default function Cursor() {
       const target = e.target.closest(MAGNETIC_SELECTOR);
       if (target) {
         el.classList.add('is-link-hovered');
-        activeMagnetic = target;
-        target.style.transition = 'transform 0.4s cubic-bezier(0.33, 1, 0.68, 1)';
+        if (!target.closest('.pstack')) {
+          activeMagnetic = target;
+          target.style.transition = 'transform 0.4s cubic-bezier(0.33, 1, 0.68, 1)';
+        }
       }
     };
 

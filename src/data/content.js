@@ -7,31 +7,39 @@ export const sections = [
 
 export const software = [
   {
-    num: '00',
+    num: '01',
     name: 'SAUTÉ',
     desc: 'AI-powered meal planning platform with smart pantry, leftover threading, and one-tap checkout',
     tags: ['React', 'Vision AI', 'Full-Stack', 'Product Design'],
+    categories: ['Product Design', 'Software Dev'],
+    image: '/saute-branding/ui.JPG',
     href: '/saute.html',
   },
   {
-    num: '01',
+    num: '02',
     name: 'Personas & Storyboarding',
     desc: 'User research case study — Mail Room Kiosk at Brown University',
     tags: ['UX Research', 'Personas', 'Storyboarding'],
+    categories: ['UX Research', 'Case Study'],
+    image: null,
     href: '/personas.html',
   },
   {
-    num: '02',
+    num: '03',
     name: 'Politechnika Krakowska',
     desc: 'Responsive redesign with WCAG accessibility compliance',
     tags: ['Responsive Design', 'Accessibility', 'Figma'],
+    categories: ['Responsive Design', 'Accessibility'],
+    image: null,
     href: '/politechnika.html',
   },
   {
-    num: '03',
+    num: '04',
     name: 'Pinterest Accessibility',
     desc: 'Accessibility evaluation and redesign of dropdown components',
     tags: ['Accessibility', 'Components', 'Interaction'],
+    categories: ['Accessibility', 'Interaction'],
+    image: null,
     href: '/components.html',
   },
 ];

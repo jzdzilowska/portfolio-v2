@@ -119,6 +119,19 @@ a:hover, button:hover, [role="button"]:hover {
   filter: none;
 }
 
+.pstack a,
+.pstack button,
+.pstack [role="button"] {
+  filter: none;
+  transition: none;
+}
+
+.pstack a:hover,
+.pstack button:hover,
+.pstack [role="button"]:hover {
+  filter: none;
+}
+
 .b-cursor.is-clicked {
   --b-cursor__size: 20px;
 }
@@ -1170,6 +1183,125 @@ button { border: none; background: none; }
 
 
 /* ═══════════════════════════════════════════════
+   PROJECT STACK — Cathy Dolle–style vertical list
+═══════════════════════════════════════════════ */
+.pstack {
+  position: relative;
+  z-index: 2;
+  background: var(--bg);
+  padding: 12vh 0 16vh;
+}
+
+.pstack__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14vh;
+}
+
+.pcard {
+  display: grid;
+  grid-template-columns: 160px 1fr 160px;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0 var(--px);
+  text-decoration: none;
+  color: inherit;
+}
+
+.pcard__left,
+.pcard__img,
+.pcard__right {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s var(--ease), transform 1s var(--ease);
+}
+
+.pcard.is-visible .pcard__img {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.pcard.is-visible .pcard__left {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.12s;
+}
+
+.pcard.is-visible .pcard__right {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.22s;
+}
+
+.pcard__left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-self: start;
+  padding-top: 0.5rem;
+}
+
+.pcard__num {
+  font-family: var(--f-gt-mono);
+  font-size: var(--f-gt-mono-size);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.pcard__name {
+  font-family: var(--f-heading);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--fg);
+  line-height: 1.15;
+}
+
+.pcard__img {
+  overflow: hidden;
+}
+
+.pcard__img img {
+  width: 100%;
+  display: block;
+  transition: transform 0.9s var(--ease);
+}
+
+.pcard:hover .pcard__img img {
+  transform: scale(1.025);
+}
+
+.pcard__placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: linear-gradient(145deg, #eee 0%, #e2e1de 100%);
+}
+
+.pcard__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  align-self: start;
+  padding-top: 0.5rem;
+}
+
+.pcard__cat {
+  font-family: var(--f-gt-mono);
+  font-size: var(--f-gt-mono-size);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+  line-height: 1.8;
+}
+
+
+/* ═══════════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════════ */
 .reveal {
@@ -1192,6 +1324,7 @@ button { border: none; background: none; }
   .entry { grid-template-columns: 2.5rem 1fr 1.75rem; gap: 1.75rem; }
   .gallery { grid-template-columns: repeat(2, 1fr); }
   .fun-grid { grid-template-columns: repeat(2, 1fr); }
+  .pcard { grid-template-columns: 120px 1fr 120px; gap: 1.5rem; }
 }
 
 
@@ -1240,6 +1373,26 @@ button { border: none; background: none; }
   .outro__heading { font-size: clamp(1.3rem, 6vw, 2rem); }
 
   .site-foot__links { gap: 1.5rem; flex-wrap: wrap; }
+
+  .pstack { padding: 8vh 0 12vh; }
+  .pstack__list { gap: 8vh; }
+  .pcard {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .pcard__left {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    padding-top: 0;
+  }
+  .pcard__right {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: auto;
+    padding-top: 0;
+  }
 }
 
 @media (max-width: 480px) {
