@@ -384,6 +384,7 @@ button { border: none; background: none; }
   display: flex;
   align-items: center;
   justify-content: center;
+  will-change: transform, filter, opacity;
 }
 
 .hero__heading {
@@ -1183,12 +1184,11 @@ button { border: none; background: none; }
 
 
 /* ═══════════════════════════════════════════════
-   PROJECT STACK — Cathy Dolle–style vertical list
+   PROJECT STACK
 ═══════════════════════════════════════════════ */
 .pstack {
   position: relative;
   z-index: 2;
-  background: var(--bg);
   padding: 12vh 0 16vh;
 }
 
@@ -1203,7 +1203,7 @@ button { border: none; background: none; }
   grid-template-columns: 160px 1fr 160px;
   align-items: center;
   gap: 2.5rem;
-  padding: 0 var(--px);
+  padding: 2.5rem var(--px);
   text-decoration: none;
   color: inherit;
 }

@@ -1,9 +1,10 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 
 const words = ['beautiful?', 'scalable?', 'efficient?', 'intuitive?', 'intentional?', 'timeless?', 'accessible?'];
 
 export default function Hero() {
   const [typed, setTyped] = useState('');
+  const bodyRef = useRef(null);
 
   const startCycle = useCallback(() => {
     let cancelled = false;
@@ -66,9 +67,28 @@ export default function Hero() {
     };
   }, [startCycle]);
 
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+
+    const onScroll = () => {
+      const vh = window.innerHeight;
+      const progress = Math.min(1, window.scrollY / (vh * 0.55));
+      const blur = progress * 18;
+      const translateY = -progress * 100;
+      el.style.filter = `blur(${blur}px)`;
+      el.style.transform = `translateY(${translateY}px)`;
+      el.style.opacity = 1 - progress;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <section className="hero">
-      <div className="hero__body">
+      <div className="hero__body" ref={bodyRef}>
         <h1 className="hero__heading">
         <span className="hero__line">(*)</span>
         <span className="hero__line">Julia Zdzilowska</span>
