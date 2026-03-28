@@ -99,11 +99,6 @@ export default function Hero() {
         </h1>
       </div>
 
-      <div className="hero__footer">
-        <p>Based in Providence, RI</p>
-        <p>(Scroll Down)</p>
-        <p>Available Worldwide</p>
-      </div>
     </section>
   );
 }

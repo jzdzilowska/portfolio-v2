@@ -445,12 +445,11 @@ button { border: none; background: none; }
   letter-spacing: .04em;
   line-height: 16.5px;
   text-transform: uppercase;
-  color: var(--fg);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  z-index: 100;
+  z-index: 200;
   background: transparent;
   color: #fff;
   mix-blend-mode: difference;

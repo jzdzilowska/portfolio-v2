@@ -18,14 +18,18 @@ export default function App() {
     <>
     {loading && <Loader onDone={handleLoaded} />}
     <Cursor />
+    <Nav sections={sections} onAbout={() => setAboutOpen(true)} />
     <div className={`frame${blurred ? ' frame--blurred' : ''}`}>
-      <Nav sections={sections} onAbout={() => setAboutOpen(true)} />
-
       <main>
         <Hero />
       </main>
     </div>
     <ProjectStack />
+    <div className="hero__footer">
+      <p>Based in Providence, RI</p>
+      <p>(Scroll Down)</p>
+      <p>Available Worldwide</p>
+    </div>
     <AboutOverlay open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </>
   );
