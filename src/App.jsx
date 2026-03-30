@@ -3,7 +3,7 @@ import Loader from './components/Loader';
 import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
-import ProjectStack from './components/ProjectStack';
+import ProjectCarousel from './components/ProjectStack';
 import AboutOverlay from './components/AboutOverlay';
 import { sections } from './data/content';
 
@@ -22,9 +22,9 @@ export default function App() {
     <div className={`frame${blurred ? ' frame--blurred' : ''}`}>
       <main>
         <Hero />
+        <ProjectCarousel />
       </main>
     </div>
-    <ProjectStack />
     <div className="hero__footer">
       <p>Based in Providence, RI</p>
       <p>(Scroll Down)</p>

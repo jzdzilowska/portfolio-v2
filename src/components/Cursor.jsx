@@ -36,7 +36,7 @@ export default function Cursor() {
       const target = e.target.closest(MAGNETIC_SELECTOR);
       if (target) {
         el.classList.add('is-link-hovered');
-        if (!target.closest('.pstack')) {
+        if (!target.closest('.csp')) {
           activeMagnetic = target;
           target.style.transition = 'transform 0.4s cubic-bezier(0.33, 1, 0.68, 1)';
         }
