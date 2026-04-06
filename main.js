@@ -1,119 +1,127 @@
+/* ══════════════════════════════════════════════════════════
+   Julia Zdzilowska Portfolio — Main JS
+   cathydolle.com-style interactions
+   ══════════════════════════════════════════════════════════ */
+
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ════════════════════════════════════════════
-     CUSTOM CURSOR  (mix-blend-mode: difference)
-     White disc that inverts color of everything
-     beneath it.  Lags slightly for personality.
-  ════════════════════════════════════════════ */
-  const cursor = document.getElementById('cursor');
+  /* ── Loading Screen ── */
+  const loader = document.getElementById('loader');
+  const loaderBar = document.getElementById('loaderBar');
 
-  if (cursor && window.matchMedia('(pointer:fine)').matches) {
-    let mx = 0, my = 0, cx = 0, cy = 0;
-
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-
-    const tick = () => {
-      cx += (mx - cx) * 0.13;
-      cy += (my - cy) * 0.13;
-      cursor.style.left = cx + 'px';
-      cursor.style.top  = cy + 'px';
-      requestAnimationFrame(tick);
-    };
-    tick();
-
-    // Grow on interactive targets
-    document.querySelectorAll('a, button, .proj, .c-email').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-    });
-
-    // Fade out when pointer leaves window
-    document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-    document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+  if (loader && loaderBar) {
+    let progress = 0;
+    const interval = setInterval(() => {
+      progress += Math.random() * 25 + 10;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(interval);
+        setTimeout(() => {
+          loader.classList.add('hide');
+          revealProjectItems();
+        }, 400);
+      }
+      loaderBar.style.width = progress + '%';
+    }, 200);
+  } else {
+    // No loader (subpages) — init reveals immediately
+    initScrollReveal();
   }
 
-
-  /* ════════════════════════════════════════════
-     SIDEBAR SCROLL PROGRESS
-     A 1.5px bar that climbs the sidebar's right
-     edge as the user scrolls down.
-  ════════════════════════════════════════════ */
-  const progressBar = document.getElementById('sidebarProgress');
-
-  if (progressBar) {
-    const update = () => {
-      const scrolled  = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const pct       = maxScroll > 0 ? (scrolled / maxScroll) * 100 : 0;
-      progressBar.style.height = pct + '%';
-    };
-    window.addEventListener('scroll', update, { passive: true });
-    update();
+  /* ── Project List: Staggered Reveal ── */
+  function revealProjectItems() {
+    const items = document.querySelectorAll('.project-item');
+    items.forEach((item, i) => {
+      setTimeout(() => {
+        item.classList.add('visible');
+        item.style.transition = `opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.04}s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${i * 0.04}s`;
+      }, i * 60);
+    });
   }
 
+  /* ── Project Hover → Preview Image ── */
+  const projectItems = document.querySelectorAll('.project-item');
+  const previewImages = document.querySelectorAll('.preview-image');
 
-  /* ════════════════════════════════════════════
-     ACTIVE NAV LINK  (sidebar)
-  ════════════════════════════════════════════ */
-  const sLinks   = document.querySelectorAll('.s-link');
-  const sections = document.querySelectorAll('section[id]');
-
-  const highlightNav = () => {
-    const mid = window.scrollY + window.innerHeight / 2;
-    sections.forEach(sec => {
-      if (mid >= sec.offsetTop && mid < sec.offsetTop + sec.offsetHeight) {
-        sLinks.forEach(l => l.classList.remove('active'));
-        const match = document.querySelector(`.s-link[href="#${sec.id}"]`);
-        if (match) match.classList.add('active');
-      }
+  projectItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      const id = item.getAttribute('data-id');
+      previewImages.forEach(img => {
+        if (img.getAttribute('data-preview') === id) {
+          img.classList.add('active');
+        } else {
+          img.classList.remove('active');
+        }
+      });
     });
-  };
-  window.addEventListener('scroll', highlightNav, { passive: true });
-  highlightNav();
 
-
-  /* ════════════════════════════════════════════
-     MOBILE NAV
-  ════════════════════════════════════════════ */
-  const mobToggle  = document.getElementById('mobToggle');
-  const mobOverlay = document.getElementById('mobOverlay');
-  const mobClose   = document.getElementById('mobClose');
-
-  const openMenu  = () => { mobOverlay.classList.add('open');  document.body.style.overflow = 'hidden'; };
-  const closeMenu = () => { mobOverlay.classList.remove('open'); document.body.style.overflow = ''; };
-
-  mobToggle  && mobToggle.addEventListener('click', openMenu);
-  mobClose   && mobClose.addEventListener('click', closeMenu);
-  mobOverlay && mobOverlay.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
-
-
-  /* ════════════════════════════════════════════
-     SMOOTH SCROLL  (anchor links)
-  ════════════════════════════════════════════ */
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href && href !== '#') {
-        e.preventDefault();
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    item.addEventListener('mouseleave', () => {
+      // Keep the last hovered image visible
     });
   });
 
-
-  /* ════════════════════════════════════════════
-     SCROLL REVEAL  — staggered fade-up
-  ════════════════════════════════════════════ */
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 100);
-        obs.unobserve(entry.target);
-      }
+  // Clear all previews when mouse leaves the list
+  const projectList = document.getElementById('projectList');
+  if (projectList) {
+    projectList.addEventListener('mouseleave', () => {
+      previewImages.forEach(img => img.classList.remove('active'));
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  }
 
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  /* ── Scroll Reveal (About & Project pages) ── */
+  function initScrollReveal() {
+    const reveals = document.querySelectorAll('.reveal');
+    if (!reveals.length) return;
 
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach((el, i) => {
+      el.style.transitionDelay = `${i * 0.06}s`;
+      observer.observe(el);
+    });
+  }
+
+  // Init scroll reveal for non-homepage pages
+  if (document.body.classList.contains('about-page') ||
+      document.body.classList.contains('project-page')) {
+    initScrollReveal();
+  }
+
+});
+
+/* ── Page Transitions ── */
+function navigateTo(event, url) {
+  event.preventDefault();
+  const transition = document.getElementById('pageTransition');
+  if (transition) {
+    transition.classList.add('active');
+    setTimeout(() => {
+      window.location.href = url;
+    }, 400);
+  } else {
+    window.location.href = url;
+  }
+}
+
+/* ── On page load: fade in from black ── */
+window.addEventListener('pageshow', () => {
+  const transition = document.getElementById('pageTransition');
+  if (transition) {
+    transition.classList.add('active');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        transition.classList.remove('active');
+      });
+    });
+  }
 });

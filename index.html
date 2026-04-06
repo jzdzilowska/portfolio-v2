@@ -1,215 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Julia Zdzilowska — Full-Stack Software Engineer. 10+ years building accessible, user-centered digital experiences.">
-    <title>Julia Zdzilowska</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Julia Zdzilowska — Software Engineer & ML Researcher. Building systems that work, from autonomous driving to full-stack web.">
+  <title>Julia ZDZILOWSKA — Software Engineer</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="cursor" id="cursor"></div>
+  <!-- ── Loading Screen ── -->
+  <div class="loader" id="loader">
+    <div class="loader-name">Julia Zdzilowska</div>
+    <div class="loader-title">Software Engineer & ML Researcher</div>
+    <div class="loader-bar-track">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+  </div>
 
-    <!-- ─── SIDEBAR ─── -->
-    <aside class="sidebar" id="sidebar">
+  <!-- ── Page Transition ── -->
+  <div class="page-transition" id="pageTransition"></div>
 
-        <!-- scroll progress bar along the sidebar's right edge -->
-        <div class="sidebar-progress" id="sidebarProgress"></div>
+  <!-- ── Header ── -->
+  <header class="header">
+    <a href="index.html" class="header-name" onclick="navigateTo(event, 'index.html')">
+      Julia Zdzilowska
+    </a>
+    <nav class="header-nav">
+      <a href="about.html" onclick="navigateTo(event, 'about.html')">About</a>
+      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener">Github</a>
+      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </header>
 
-        <a href="index.html" class="s-logo">JZ</a>
+  <!-- ── Main Content ── -->
+  <main class="main">
 
-        <div class="s-name" aria-hidden="true">Julia Zdzilowska</div>
+    <!-- Left: Project List -->
+    <div class="project-list-wrapper">
+      <div class="project-list" id="projectList">
 
-        <nav class="s-nav">
-            <a href="#work"    class="s-link">Work</a>
-            <a href="#about"   class="s-link">About</a>
-            <a href="#contact" class="s-link">Contact</a>
-        </nav>
-
-        <div class="s-foot">
-            <div class="s-avail">
-                <span class="s-dot"></span>
-                <span class="mono">Available</span>
-            </div>
-            <span class="mono s-year">© 2026</span>
+        <div class="project-item" data-slug="runwave" data-id="0" onclick="navigateTo(event, 'projects/runwave.html')">
+          <span class="project-number">01</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Runwave</span>
         </div>
 
-    </aside>
+        <div class="project-item" data-slug="saute" data-id="1" onclick="navigateTo(event, 'projects/saute.html')">
+          <span class="project-number">02</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Saute</span>
+        </div>
 
-    <!-- ─── MOBILE TOP NAV ─── -->
-    <header class="mob-nav" id="mobNav">
-        <a href="index.html" class="s-logo">JZ</a>
-        <button class="mob-toggle" id="mobToggle" aria-label="Menu">
-            <span></span><span></span>
-        </button>
-    </header>
+        <div class="project-item" data-slug="giraffe" data-id="2" onclick="navigateTo(event, 'projects/giraffe.html')">
+          <span class="project-number">03</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Giraffe Lab</span>
+        </div>
 
-    <div class="mob-overlay" id="mobOverlay">
-        <button class="mob-close" id="mobClose">✕</button>
-        <a href="#work"    class="mob-link">Work</a>
-        <a href="#about"   class="mob-link">About</a>
-        <a href="#contact" class="mob-link">Contact</a>
+        <div class="project-item" data-slug="amazon" data-id="3" onclick="navigateTo(event, 'projects/amazon.html')">
+          <span class="project-number">04</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Amazon</span>
+        </div>
+
+        <div class="project-item" data-slug="tryp" data-id="4" onclick="navigateTo(event, 'projects/tryp.html')">
+          <span class="project-number">05</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Tryp</span>
+        </div>
+
+        <div class="project-item" data-slug="greencar" data-id="5" onclick="navigateTo(event, 'projects/greencar.html')">
+          <span class="project-number">06</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">GreenCarLane</span>
+        </div>
+
+        <div class="project-item" data-slug="drowsiness" data-id="6" onclick="navigateTo(event, 'projects/drowsiness.html')">
+          <span class="project-number">07</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Drowsiness Detection</span>
+        </div>
+
+        <div class="project-item" data-slug="freelance" data-id="7" onclick="navigateTo(event, 'projects/freelance.html')">
+          <span class="project-number">08</span>
+          <span class="project-slash">/</span>
+          <span class="project-name">Freelance</span>
+        </div>
+
+      </div>
     </div>
 
-    <!-- ─── MAIN ─── -->
-    <main class="main">
+    <!-- Right: Preview Image -->
+    <div class="preview-wrapper">
+      <div class="preview-image" data-preview="0">
+        <div class="preview-placeholder">Runwave — AI Financial Dashboard</div>
+      </div>
+      <div class="preview-image" data-preview="1">
+        <div class="preview-placeholder">Saute — Smart Meal Planning</div>
+      </div>
+      <div class="preview-image" data-preview="2">
+        <div class="preview-placeholder">Giraffe Lab — Autonomous Driving</div>
+      </div>
+      <div class="preview-image" data-preview="3">
+        <div class="preview-placeholder">Amazon — ML Pipeline Testing</div>
+      </div>
+      <div class="preview-image" data-preview="4">
+        <div class="preview-placeholder">Tryp — Route Graph Service</div>
+      </div>
+      <div class="preview-image" data-preview="5">
+        <div class="preview-placeholder">GreenCarLane — Frontend Modernization</div>
+      </div>
+      <div class="preview-image" data-preview="6">
+        <div class="preview-placeholder">Drowsiness Detection — ML System</div>
+      </div>
+      <div class="preview-image" data-preview="7">
+        <div class="preview-placeholder">Freelance — Web Development</div>
+      </div>
+    </div>
 
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-kicker">
-                <span class="dot-green"></span>
-                <span class="mono">Full-Stack Software Engineer &nbsp;·&nbsp; Available for new projects</span>
-            </div>
+  </main>
 
-            <h1 class="hero-stmt">
-                Building at the<br>
-                intersection of<br>
-                engineering<br>
-                <em>&amp;&nbsp;design.</em>
-            </h1>
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-email">julia_zdzilowska@brown.edu</a>
+    <span class="footer-scroll">Scroll</span>
+  </footer>
 
-            <div class="hero-foot">
-                <span class="mono hero-detail">10+ years &nbsp;·&nbsp; Brown University &nbsp;·&nbsp; Providence, RI</span>
-                <span class="mono hero-scroll">scroll ↓</span>
-            </div>
-        </section>
-
-        <!-- WORK -->
-        <section id="work" class="sec">
-            <div class="sec-head">
-                <span class="sec-label mono">Selected Work</span>
-                <span class="sec-n mono">(04)</span>
-            </div>
-
-            <div class="proj-list">
-
-                <a href="personas.html" class="proj reveal">
-                    <span class="proj-num mono">01</span>
-                    <div class="proj-body">
-                        <h2 class="proj-title">Personas &amp; Storyboarding</h2>
-                        <p class="proj-sub">User research case study — Mail Room Kiosk at Brown University</p>
-                    </div>
-                    <div class="proj-tags">
-                        <span class="tag">UX Research</span>
-                        <span class="tag">Personas</span>
-                        <span class="tag">Storyboarding</span>
-                    </div>
-                    <span class="proj-arr">↗</span>
-                </a>
-
-                <a href="zest.html" class="proj reveal">
-                    <span class="proj-num mono">02</span>
-                    <div class="proj-body">
-                        <h2 class="proj-title">Zest UI Redesign</h2>
-                        <p class="proj-sub">Onboarding flow redesign for an online gifting platform</p>
-                    </div>
-                    <div class="proj-tags">
-                        <span class="tag">UI/UX Design</span>
-                        <span class="tag">Wireframing</span>
-                        <span class="tag">Prototyping</span>
-                    </div>
-                    <span class="proj-arr">↗</span>
-                </a>
-
-                <a href="politechnika.html" class="proj reveal">
-                    <span class="proj-num mono">03</span>
-                    <div class="proj-body">
-                        <h2 class="proj-title">Politechnika Krakowska</h2>
-                        <p class="proj-sub">Responsive redesign with WCAG accessibility compliance</p>
-                    </div>
-                    <div class="proj-tags">
-                        <span class="tag">Responsive Design</span>
-                        <span class="tag">Accessibility</span>
-                        <span class="tag">Figma</span>
-                    </div>
-                    <span class="proj-arr">↗</span>
-                </a>
-
-                <a href="components.html" class="proj reveal">
-                    <span class="proj-num mono">04</span>
-                    <div class="proj-body">
-                        <h2 class="proj-title">Pinterest Accessibility</h2>
-                        <p class="proj-sub">Accessibility evaluation and redesign of dropdown components</p>
-                    </div>
-                    <div class="proj-tags">
-                        <span class="tag">Accessibility</span>
-                        <span class="tag">Components</span>
-                        <span class="tag">Interaction</span>
-                    </div>
-                    <span class="proj-arr">↗</span>
-                </a>
-
-            </div>
-        </section>
-
-        <!-- ABOUT -->
-        <section id="about" class="sec">
-            <div class="sec-head">
-                <span class="sec-label mono">About</span>
-            </div>
-
-            <div class="about-grid">
-                <div class="about-pull reveal">
-                    I build things<br>
-                    that <em>actually</em><br>
-                    work.
-                </div>
-                <div class="about-right reveal">
-                    <p class="about-body">
-                        Developer at Brown University with 10+ years crafting scalable, maintainable applications. My work lives at the intersection of solid engineering and thoughtful design — finding elegant solutions to genuinely hard problems.
-                    </p>
-                    <div class="skills">
-                        <div class="skill-row">
-                            <span class="skill-lbl mono">Languages</span>
-                            <span class="skill-val">Python &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; JavaScript &nbsp;·&nbsp; Java &nbsp;·&nbsp; C/C++</span>
-                        </div>
-                        <div class="skill-row">
-                            <span class="skill-lbl mono">Frameworks</span>
-                            <span class="skill-val">React &nbsp;·&nbsp; Node.js &nbsp;·&nbsp; Express &nbsp;·&nbsp; MERN Stack</span>
-                        </div>
-                        <div class="skill-row">
-                            <span class="skill-lbl mono">Tools</span>
-                            <span class="skill-val">Git &nbsp;·&nbsp; Docker &nbsp;·&nbsp; Figma &nbsp;·&nbsp; Vercel &nbsp;·&nbsp; PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact" class="sec sec-contact">
-            <div class="sec-head reveal">
-                <span class="sec-label mono">Let's work together</span>
-            </div>
-
-            <a href="mailto:zdzilowska@gmail.com" class="c-email reveal">
-                zdzilowska@gmail.com
-            </a>
-
-            <div class="c-row reveal">
-                <div class="c-links">
-                    <a href="https://github.com/jzdzilowska"              target="_blank" rel="noopener" class="c-link">GitHub <span>↗</span></a>
-                    <a href="https://www.linkedin.com/in/zdzilowska/"     target="_blank" rel="noopener" class="c-link">LinkedIn <span>↗</span></a>
-                    <a href="https://www.instagram.com/zdzilowska/"       target="_blank" rel="noopener" class="c-link">Instagram <span>↗</span></a>
-                    <a href="https://i.ibb.co/Ng4XZ74L/Julia-Zdzilowska-CV.png" target="_blank" rel="noopener" class="c-link">Resume <span>↗</span></a>
-                </div>
-                <a href="tel:+13312800276" class="mono c-phone">+1 (331) 280-0276</a>
-            </div>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="foot">
-            <span class="mono foot-l">© 2026</span>
-            <span class="foot-name">Julia Zdzilowska</span>
-            <span class="mono foot-r">All rights reserved</span>
-        </footer>
-
-    </main>
-
-    <script src="main.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
