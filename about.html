@@ -5,38 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="About Julia Zdzilowska — Software Engineer & ML Researcher at Brown University.">
   <title>About — Julia Zdzilowska</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body class="about-page">
 
-  <!-- ── Page Transition ── -->
   <div class="page-transition" id="pageTransition"></div>
 
-  <!-- ── Header ── -->
-  <header class="header">
-    <a href="index.html" class="header-name" onclick="navigateTo(event, 'index.html')">
-      Julia Zdzilowska
-    </a>
+  <div class="cursor-wrap">
+    <div id="pixelCrosshair" class="cursor-inner">
+      <div id="crosshairBorder" class="crosshair-border" style="border-color:#000"></div>
+      <div id="crosshairFill" class="crosshair-fill" style="background-color:#000"></div>
+    </div>
+  </div>
+
+  <header id="siteHeader">
+    <a href="index.html" class="header-name" onclick="navigateTo(event, 'index.html')">Julia Zdzilowska</a>
     <nav class="header-nav">
-      <a href="about.html" onclick="navigateTo(event, 'about.html')">About</a>
-      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener">Github</a>
-      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener" class="nav-item">Github</a>
+      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener" class="nav-item">LinkedIn</a>
     </nav>
   </header>
 
-  <!-- ── About Content ── -->
-  <div class="about-content">
-
-    <!-- Left: Photo -->
-    <div class="about-left">
+  <div class="about-page-content">
+    <div class="about-page-left">
       <div class="about-image-wrapper reveal">
         <div class="about-image-placeholder">Photo</div>
       </div>
     </div>
 
-    <!-- Right: Bio & Details -->
-    <div class="about-right">
-
+    <div class="about-page-right">
       <div class="about-intro reveal">About</div>
 
       <div class="about-bio reveal">
@@ -49,65 +47,42 @@
         <div class="about-detail-group">
           <h3>Languages</h3>
           <ul>
-            <li>Python</li>
-            <li>Java</li>
-            <li>C / C++</li>
-            <li>JavaScript / TypeScript</li>
-            <li>Scala</li>
-            <li>SQL</li>
-            <li>Swift</li>
+            <li>Python</li><li>Java</li><li>C / C++</li>
+            <li>JavaScript / TypeScript</li><li>Scala</li><li>SQL</li><li>Swift</li>
           </ul>
         </div>
-
         <div class="about-detail-group">
           <h3>Frontend</h3>
           <ul>
-            <li>React</li>
-            <li>Next.js</li>
-            <li>Vue</li>
-            <li>Angular</li>
-            <li>Tailwind CSS</li>
-            <li>Playwright</li>
+            <li>React</li><li>Next.js</li><li>Vue</li>
+            <li>Angular</li><li>Tailwind CSS</li><li>Playwright</li>
           </ul>
         </div>
-
         <div class="about-detail-group">
           <h3>Backend & Infrastructure</h3>
           <ul>
-            <li>Node.js / Express</li>
-            <li>FastAPI</li>
-            <li>REST / GraphQL</li>
-            <li>AWS (Lambda, Glue, Athena, EC2)</li>
-            <li>Docker</li>
-            <li>CI/CD</li>
+            <li>Node.js / Express</li><li>FastAPI</li><li>REST / GraphQL</li>
+            <li>AWS (Lambda, Glue, Athena, EC2)</li><li>Docker</li><li>CI/CD</li>
           </ul>
         </div>
-
         <div class="about-detail-group">
           <h3>Databases</h3>
           <ul>
-            <li>PostgreSQL</li>
-            <li>MongoDB</li>
-            <li>DynamoDB</li>
-            <li>Redis</li>
-            <li>Amazon S3</li>
+            <li>PostgreSQL</li><li>MongoDB</li><li>DynamoDB</li>
+            <li>Redis</li><li>Amazon S3</li>
           </ul>
         </div>
-
         <div class="about-detail-group">
           <h3>ML & Data</h3>
           <ul>
-            <li>PyTorch</li>
-            <li>TensorFlow / Keras</li>
-            <li>Pandas</li>
-            <li>OpenCV</li>
+            <li>PyTorch</li><li>TensorFlow / Keras</li>
+            <li>Pandas</li><li>OpenCV</li>
           </ul>
         </div>
       </div>
 
       <div class="about-experience reveal">
         <h3>Experience</h3>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">ML & Autonomous Systems Researcher</span>
@@ -115,7 +90,6 @@
           </div>
           <span class="experience-date">Jan 2026 — Now</span>
         </div>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">Software Development Engineer Intern</span>
@@ -123,7 +97,6 @@
           </div>
           <span class="experience-date">Jun — Aug 2025</span>
         </div>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">Software Engineering Intern</span>
@@ -131,7 +104,6 @@
           </div>
           <span class="experience-date">Oct — Dec 2024</span>
         </div>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">Full-Stack Development Intern</span>
@@ -139,7 +111,6 @@
           </div>
           <span class="experience-date">Aug — Oct 2024</span>
         </div>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">Teaching Assistant</span>
@@ -147,7 +118,6 @@
           </div>
           <span class="experience-date">Jan 2024 — Now</span>
         </div>
-
         <div class="experience-item">
           <div>
             <span class="experience-role">Freelance Full Stack Developer</span>
@@ -155,15 +125,13 @@
           <span class="experience-date">Mar 2020 — Aug 2024</span>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ── Footer ── -->
-  <footer class="footer">
-    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-email">julia_zdzilowska@brown.edu</a>
+  <footer id="siteFooter">
+    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-contact">Contact</a>
   </footer>
 
-  <script src="main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

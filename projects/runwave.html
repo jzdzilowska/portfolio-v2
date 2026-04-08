@@ -4,18 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Runwave — Julia Zdzilowska</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body class="project-page">
 
-  <div class="page-transition" id="pageTransition"></div>
+      <div class="page-transition" id="pageTransition"></div>
 
-  <header class="header">
+  <!-- Crosshair cursor -->
+  <div class="cursor-wrap">
+    <div id="pixelCrosshair" class="cursor-inner">
+      <div id="crosshairBorder" class="crosshair-border" style="border-color:#000"></div>
+      <div id="crosshairFill" class="crosshair-fill" style="background-color:#000"></div>
+    </div>
+  </div>
+
+  <header id="siteHeader">
     <a href="../index.html" class="header-name" onclick="navigateTo(event, '../index.html')">Julia Zdzilowska</a>
     <nav class="header-nav">
-      <a href="../about.html" onclick="navigateTo(event, '../about.html')">About</a>
-      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener">Github</a>
-      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener" class="nav-item">Github</a>
+      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener" class="nav-item">LinkedIn</a>
     </nav>
   </header>
 
@@ -98,10 +106,10 @@
     </a>
   </div>
 
-  <footer class="footer">
-    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-email">julia_zdzilowska@brown.edu</a>
+      <footer id="siteFooter">
+    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-contact">Contact</a>
   </footer>
 
-  <script src="../main.js"></script>
+  <script src="../js/main.js"></script>
 </body>
 </html>

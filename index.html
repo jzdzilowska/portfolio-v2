@@ -1,132 +1,183 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="overscroll-none">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Julia Zdzilowska — Software Engineer & ML Researcher. Building systems that work, from autonomous driving to full-stack web.">
+  <meta name="description" content="Julia Zdzilowska is a software engineer and ML researcher who builds systems that work — from autonomous driving to full-stack web applications — with a detail-driven, minimalist approach.">
   <title>Julia ZDZILOWSKA — Software Engineer</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-  <!-- ── Loading Screen ── -->
-  <div class="loader" id="loader">
-    <div class="loader-name">Julia Zdzilowska</div>
-    <div class="loader-title">Software Engineer & ML Researcher</div>
-    <div class="loader-bar-track">
-      <div class="loader-bar" id="loaderBar"></div>
+  <!-- ── Custom Crosshair Cursor (mix-blend-difference, viewport-level) ── -->
+  <div class="cursor-wrap">
+    <div id="pixelCrosshair" class="cursor-inner">
+      <div id="crosshairBorder" class="crosshair-border"></div>
+      <div id="crosshairFill" class="crosshair-fill"></div>
+      <p id="pixelText" class="pixel-text">
+        <span id="projectText" class="project-text-span">OPEN PROJECT</span>
+      </p>
     </div>
   </div>
 
-  <!-- ── Page Transition ── -->
-  <div class="page-transition" id="pageTransition"></div>
-
-  <!-- ── Header ── -->
-  <header class="header">
-    <a href="index.html" class="header-name" onclick="navigateTo(event, 'index.html')">
-      Julia Zdzilowska
-    </a>
+  <!-- ── Header (full viewport width, z above everything) ── -->
+  <header id="siteHeader">
+    <a href="index.html" class="header-name">Julia Zdzilowska</a>
     <nav class="header-nav">
-      <a href="about.html" onclick="navigateTo(event, 'about.html')">About</a>
-      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener">Github</a>
-      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener">LinkedIn</a>
+      <span class="nav-item nav-about" id="aboutBtn">About</span>
+      <a href="https://github.com/jzdzilowska" target="_blank" rel="noopener" class="nav-item">
+        <svg width="14" height="10" viewBox="0 0 14 10" fill="currentColor" class="nav-sep-icon"><circle cx="2" cy="5" r="1.2"/><circle cx="7" cy="5" r="1.2"/><circle cx="12" cy="5" r="1.2"/></svg>
+        Github
+      </a>
+      <a href="https://linkedin.com/in/zdzilowska" target="_blank" rel="noopener" class="nav-item">LinkedIn</a>
     </nav>
   </header>
 
-  <!-- ── Main Content ── -->
-  <main class="main">
+  <!-- ── Main White Content Area ── -->
+  <main id="mainSection">
 
-    <!-- Left: Project List -->
-    <div class="project-list-wrapper">
-      <div class="project-list" id="projectList">
-
-        <div class="project-item" data-slug="runwave" data-id="0" onclick="navigateTo(event, 'projects/runwave.html')">
-          <span class="project-number">01</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Runwave</span>
-        </div>
-
-        <div class="project-item" data-slug="saute" data-id="1" onclick="navigateTo(event, 'projects/saute.html')">
-          <span class="project-number">02</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Saute</span>
-        </div>
-
-        <div class="project-item" data-slug="giraffe" data-id="2" onclick="navigateTo(event, 'projects/giraffe.html')">
-          <span class="project-number">03</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Giraffe Lab</span>
-        </div>
-
-        <div class="project-item" data-slug="amazon" data-id="3" onclick="navigateTo(event, 'projects/amazon.html')">
-          <span class="project-number">04</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Amazon</span>
-        </div>
-
-        <div class="project-item" data-slug="tryp" data-id="4" onclick="navigateTo(event, 'projects/tryp.html')">
-          <span class="project-number">05</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Tryp</span>
-        </div>
-
-        <div class="project-item" data-slug="greencar" data-id="5" onclick="navigateTo(event, 'projects/greencar.html')">
-          <span class="project-number">06</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">GreenCarLane</span>
-        </div>
-
-        <div class="project-item" data-slug="drowsiness" data-id="6" onclick="navigateTo(event, 'projects/drowsiness.html')">
-          <span class="project-number">07</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Drowsiness Detection</span>
-        </div>
-
-        <div class="project-item" data-slug="freelance" data-id="7" onclick="navigateTo(event, 'projects/freelance.html')">
-          <span class="project-number">08</span>
-          <span class="project-slash">/</span>
-          <span class="project-name">Freelance</span>
-        </div>
-
-      </div>
+    <!-- ── Loader (tiny square, center of viewport) ── -->
+    <div class="loader-square" id="loaderSquare">
+      <span id="loaderBar" class="loader-bar"></span>
     </div>
 
-    <!-- Right: Preview Image -->
-    <div class="preview-wrapper">
-      <div class="preview-image" data-preview="0">
-        <div class="preview-placeholder">Runwave — AI Financial Dashboard</div>
-      </div>
-      <div class="preview-image" data-preview="1">
-        <div class="preview-placeholder">Saute — Smart Meal Planning</div>
-      </div>
-      <div class="preview-image" data-preview="2">
-        <div class="preview-placeholder">Giraffe Lab — Autonomous Driving</div>
-      </div>
-      <div class="preview-image" data-preview="3">
-        <div class="preview-placeholder">Amazon — ML Pipeline Testing</div>
-      </div>
-      <div class="preview-image" data-preview="4">
-        <div class="preview-placeholder">Tryp — Route Graph Service</div>
-      </div>
-      <div class="preview-image" data-preview="5">
-        <div class="preview-placeholder">GreenCarLane — Frontend Modernization</div>
-      </div>
-      <div class="preview-image" data-preview="6">
-        <div class="preview-placeholder">Drowsiness Detection — ML System</div>
-      </div>
-      <div class="preview-image" data-preview="7">
-        <div class="preview-placeholder">Freelance — Web Development</div>
-      </div>
+    <!-- ── Canvas for hover image previews ── -->
+    <canvas id="projectCanvas" class="project-canvas"></canvas>
+
+    <!-- ── View Toggle (List / Slider) ── -->
+    <div class="view-toggle" id="viewToggle">
+      <span id="listBtn">List</span>
+      <span id="sliderBtn">Slider</span>
     </div>
+
+    <!-- ── Project List Container ── -->
+    <div id="projectListWrap" class="project-list-wrap">
+
+      <!-- Left Column (projects 1-4, left aligned) -->
+      <div class="project-col project-col-left">
+        <div class="project-row">
+          <li data-slug="runwave" data-id="project-0" class="project-li" onclick="navigateTo(event, 'projects/runwave.html')">
+            <span class="proj-num">01/</span>
+            <span class="proj-name">Runwave</span>
+          </li>
+        </div>
+        <div class="project-row">
+          <li data-slug="saute" data-id="project-1" class="project-li" onclick="navigateTo(event, 'projects/saute.html')">
+            <span class="proj-num">02/</span>
+            <span class="proj-name">Saute</span>
+          </li>
+        </div>
+        <div class="project-row">
+          <li data-slug="giraffe" data-id="project-2" class="project-li" onclick="navigateTo(event, 'projects/giraffe.html')">
+            <span class="proj-num">03/</span>
+            <span class="proj-name">Giraffe Lab</span>
+          </li>
+        </div>
+        <div class="project-row">
+          <li data-slug="amazon" data-id="project-3" class="project-li" onclick="navigateTo(event, 'projects/amazon.html')">
+            <span class="proj-num">04/</span>
+            <span class="proj-name">Amazon</span>
+          </li>
+        </div>
+      </div>
+
+      <!-- Right Column (projects 5-8, right aligned) -->
+      <div class="project-col project-col-right">
+        <div class="project-row project-row-right">
+          <li data-slug="tryp" data-id="project-4" class="project-li" onclick="navigateTo(event, 'projects/tryp.html')">
+            <span class="proj-num">05/</span>
+            <span class="proj-name">Tryp</span>
+          </li>
+        </div>
+        <div class="project-row project-row-right">
+          <li data-slug="greencar" data-id="project-5" class="project-li" onclick="navigateTo(event, 'projects/greencar.html')">
+            <span class="proj-num">06/</span>
+            <span class="proj-name">GreenCarLane</span>
+          </li>
+        </div>
+        <div class="project-row project-row-right">
+          <li data-slug="drowsiness" data-id="project-6" class="project-li" onclick="navigateTo(event, 'projects/drowsiness.html')">
+            <span class="proj-num">07/</span>
+            <span class="proj-name">Drowsiness Detection</span>
+          </li>
+        </div>
+        <div class="project-row project-row-right">
+          <li data-slug="freelance" data-id="project-7" class="project-li" onclick="navigateTo(event, 'projects/freelance.html')">
+            <span class="proj-num">08/</span>
+            <span class="proj-name">Freelance</span>
+          </li>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── Mobile Project List ── -->
+    <ul id="mobileProjectList" class="mobile-project-list">
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/runwave.html')">
+        <span class="mobile-num">01/</span><span class="mobile-name">Runwave</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/saute.html')">
+        <span class="mobile-num">02/</span><span class="mobile-name">Saute</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/giraffe.html')">
+        <span class="mobile-num">03/</span><span class="mobile-name">Giraffe Lab</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/amazon.html')">
+        <span class="mobile-num">04/</span><span class="mobile-name">Amazon</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/tryp.html')">
+        <span class="mobile-num">05/</span><span class="mobile-name">Tryp</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/greencar.html')">
+        <span class="mobile-num">06/</span><span class="mobile-name">GreenCarLane</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/drowsiness.html')">
+        <span class="mobile-num">07/</span><span class="mobile-name">Drowsiness Detection</span>
+      </li>
+      <li class="mobile-project-item" onclick="navigateTo(event, 'projects/freelance.html')">
+        <span class="mobile-num">08/</span><span class="mobile-name">Freelance</span>
+      </li>
+    </ul>
 
   </main>
 
+  <!-- ── About Overlay ── -->
+  <div id="aboutOverlay" class="about-overlay">
+    <div class="about-overlay-inner">
+      <div class="about-close" id="aboutClose">&times;</div>
+      <div class="about-content-grid">
+        <div class="about-col-left">
+          <p class="about-label">About</p>
+          <p class="about-bio">Julia Zdzilowska is a software engineer and ML researcher at Brown University. She builds systems that work — from autonomous driving perception to full-stack web applications — with a detail-driven, minimalist approach.</p>
+          <p class="about-bio">Previously at Amazon and Giraffe Lab. She enjoys crafting clean, functional interfaces and occasionally dives deep into computer vision research.</p>
+        </div>
+        <div class="about-col-right">
+          <div class="about-group">
+            <p class="about-group-label">Focus</p>
+            <p class="about-group-text">Full-Stack Development, Machine Learning, Computer Vision, Autonomous Systems</p>
+          </div>
+          <div class="about-group">
+            <p class="about-group-label">Education</p>
+            <p class="about-group-text">Brown University — B.S. Computer Science</p>
+          </div>
+          <div class="about-group">
+            <p class="about-group-label">Contact</p>
+            <a href="mailto:julia_zdzilowska@brown.edu" class="about-group-text about-link">julia_zdzilowska@brown.edu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Footer ── -->
-  <footer class="footer">
-    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-email">julia_zdzilowska@brown.edu</a>
-    <span class="footer-scroll">Scroll</span>
+  <footer id="siteFooter">
+    <a href="mailto:julia_zdzilowska@brown.edu" class="footer-contact">Contact</a>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- ── Page Transition Overlay ── -->
+  <div class="page-transition" id="pageTransition"></div>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
