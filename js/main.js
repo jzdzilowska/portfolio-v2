@@ -117,20 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!photos) return;
 
     const items = photos.querySelectorAll('.photo-item');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.08, root: photos });
-
-    items.forEach((item, i) => {
-      item.style.transitionDelay = `${i * 0.08}s`;
-      observer.observe(item);
-    });
+    items.forEach(item => item.classList.add('visible'));
   }
 
   /* ══════════════════════════════════════════════════════════
-     SCROLL-BASED NAME HIGHLIGHTING
+     INFINITE SCROLL + NAME HIGHLIGHTING + PARALLAX
      ══════════════════════════════════════════════════════════ */
 
   if (isHomePage) {
@@ -138,7 +129,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (photos) {
       const allNames = document.querySelectorAll('.project-name');
-      const photoItems = photos.querySelectorAll('.photo-item');
+      const origItems = Array.from(photos.querySelectorAll('.photo-item'));
+      const totalOrig = origItems.length;
+
+      // Clone all items once before and once after for seamless loop
+      const clonesBefore = origItems.map(el => {
+        const c = el.cloneNode(true);
+        c.classList.add('visible', 'is-clone');
+        return c;
+      });
+      const clonesAfter = origItems.map(el => {
+        const c = el.cloneNode(true);
+        c.classList.add('visible', 'is-clone');
+        return c;
+      });
+
+      clonesBefore.forEach(c => photos.insertBefore(c, origItems[0]));
+      clonesAfter.forEach(c => photos.appendChild(c));
+
+      // Measure one full set height after clones are in DOM
+      let setHeight = 0;
+      function measureSet() {
+        setHeight = 0;
+        origItems.forEach(item => { setHeight += item.offsetHeight; });
+      }
+
+      measureSet();
+      // Start scroll at the middle set (the originals)
+      photos.scrollTop = setHeight;
+
+      let ticking = false;
+
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const scrollTop = photos.scrollTop;
+
+          // If scrolled past the original set into the bottom clones, jump back
+          if (scrollTop >= setHeight * 2) {
+            photos.scrollTop = scrollTop - setHeight;
+          }
+          // If scrolled above the original set into the top clones, jump forward
+          else if (scrollTop < setHeight) {
+            // Only jump once we've scrolled well into the top clones
+            if (scrollTop <= 0) {
+              photos.scrollTop = scrollTop + setHeight;
+            }
+          }
+
+          updateActiveNames();
+          updateParallax();
+          ticking = false;
+        });
+      }
 
       function updateActiveNames() {
         const containerRect = photos.getBoundingClientRect();
@@ -146,13 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let closestIdx = 0;
         let closestDist = Infinity;
 
-        photoItems.forEach((item, i) => {
+        photos.querySelectorAll('.photo-item').forEach(item => {
           const rect = item.getBoundingClientRect();
           const itemCenter = rect.top + rect.height / 2;
           const dist = Math.abs(itemCenter - center);
           if (dist < closestDist) {
             closestDist = dist;
-            closestIdx = i;
+            closestIdx = parseInt(item.getAttribute('data-index'));
           }
         });
 
@@ -165,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerRect = photos.getBoundingClientRect();
         const containerH = containerRect.height;
 
-        photoItems.forEach(item => {
+        photos.querySelectorAll('.photo-item').forEach(item => {
           const rect = item.getBoundingClientRect();
           const inner = item.querySelector('.photo-inner');
           if (!inner) return;
@@ -173,18 +217,13 @@ document.addEventListener('DOMContentLoaded', () => {
           const itemCenter = rect.top + rect.height / 2;
           const viewCenter = containerRect.top + containerH / 2;
           const ratio = (itemCenter - viewCenter) / containerH;
-          const shift = ratio * 15;
-          inner.style.transform = `translateY(${shift}%)`;
+          inner.style.transform = `translateY(${ratio * 15}%)`;
         });
       }
 
-      function onScroll() {
-        updateActiveNames();
-        updateParallax();
-      }
-
       photos.addEventListener('scroll', onScroll);
-      setTimeout(onScroll, 800);
+      window.addEventListener('resize', () => { measureSet(); });
+      setTimeout(() => { updateActiveNames(); updateParallax(); }, 800);
 
       const hoverTargets = document.querySelectorAll('.project-name, .photo-item');
       hoverTargets.forEach(el => {
