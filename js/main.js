@@ -59,9 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (isHomePage) {
     const loaderBar = document.getElementById('loaderBar');
-    const projectListWrap = document.getElementById('projectListWrap');
+    const projectLayout = document.getElementById('projectLayout');
     const mobileList = document.getElementById('mobileProjectList');
-    const viewToggle = document.getElementById('viewToggle');
 
     let progress = 0;
 
@@ -73,19 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
         loaderBar.style.transform = 'scaleY(1)';
 
         setTimeout(() => {
-          // Fade out loader
           loaderSquare.style.opacity = '0';
 
           setTimeout(() => {
             loaderSquare.style.display = 'none';
 
-            // Fade in project list
-            if (projectListWrap) projectListWrap.style.opacity = '1';
+            if (projectLayout) projectLayout.style.opacity = '1';
             if (mobileList) mobileList.style.opacity = '1';
-            if (viewToggle) viewToggle.style.opacity = '1';
 
-            // Stagger reveal project items
-            revealProjectItems();
+            revealProjectNames();
+            revealPhotos();
           }, 250);
         }, 350);
 
@@ -100,124 +96,106 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ══════════════════════════════════════════════════════════
-     STAGGERED PROJECT REVEAL
+     STAGGERED NAME & PHOTO REVEAL
      ══════════════════════════════════════════════════════════ */
 
-  function revealProjectItems() {
-    const items = document.querySelectorAll('.project-li');
+  function revealProjectNames() {
+    const names = document.querySelectorAll('.project-name');
     const mobileItems = document.querySelectorAll('.mobile-project-item');
 
-    items.forEach((item, i) => {
-      setTimeout(() => {
-        item.classList.add('visible');
-      }, i * 70);
+    names.forEach((el, i) => {
+      setTimeout(() => el.classList.add('revealed'), i * 70);
     });
 
     mobileItems.forEach((item, i) => {
-      setTimeout(() => {
-        item.style.opacity = '1';
-      }, i * 80);
+      setTimeout(() => { item.style.opacity = '1'; }, i * 80);
+    });
+  }
+
+  function revealPhotos() {
+    const photos = document.getElementById('projectPhotos');
+    if (!photos) return;
+
+    const items = photos.querySelectorAll('.photo-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.08, root: photos });
+
+    items.forEach((item, i) => {
+      item.style.transitionDelay = `${i * 0.08}s`;
+      observer.observe(item);
     });
   }
 
   /* ══════════════════════════════════════════════════════════
-     PROJECT HOVER → CANVAS PREVIEW + CURSOR STATE
+     SCROLL-BASED NAME HIGHLIGHTING
      ══════════════════════════════════════════════════════════ */
 
-  const canvas = document.getElementById('projectCanvas');
+  if (isHomePage) {
+    const photos = document.getElementById('projectPhotos');
 
-  if (canvas && isHomePage) {
-    const ctx = canvas.getContext('2d');
-    let canvasW, canvasH;
-    let hoveredIdx = null;
-    let displayIdx = null;
-    let currentAlpha = 0;
-    let targetAlpha = 0;
+    if (photos) {
+      const allNames = document.querySelectorAll('.project-name');
+      const photoItems = photos.querySelectorAll('.photo-item');
 
-    const colors = [
-      ['#1a1a2e', '#16213e'], // Runwave
-      ['#2d1b2e', '#4a2c6e'], // Saute
-      ['#1b2d1e', '#2e6e35'], // Giraffe
-      ['#2e2a1b', '#6e5f2e'], // Amazon
-      ['#1b2a2e', '#2e5f6e'], // Tryp
-      ['#1e2d1b', '#3d6e2e'], // GreenCarLane
-      ['#2e1b1b', '#6e2e2e'], // Drowsiness
-      ['#1b1b2e', '#2e2e6e'], // Freelance
-    ];
+      function updateActiveNames() {
+        const containerRect = photos.getBoundingClientRect();
+        const center = containerRect.top + containerRect.height / 2;
+        let closestIdx = 0;
+        let closestDist = Infinity;
 
-    const names = [
-      'RUNWAVE', 'SAUTE', 'GIRAFFE LAB', 'AMAZON',
-      'TRYP', 'GREENCARLANE', 'DROWSINESS DETECTION', 'FREELANCE'
-    ];
+        photoItems.forEach((item, i) => {
+          const rect = item.getBoundingClientRect();
+          const itemCenter = rect.top + rect.height / 2;
+          const dist = Math.abs(itemCenter - center);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIdx = i;
+          }
+        });
 
-    function resize() {
-      canvasW = window.innerWidth;
-      canvasH = window.innerHeight;
-      canvas.width = canvasW * devicePixelRatio;
-      canvas.height = canvasH * devicePixelRatio;
-      canvas.style.width = canvasW + 'px';
-      canvas.style.height = canvasH + 'px';
-      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-    }
-
-    resize();
-    window.addEventListener('resize', resize);
-
-    function draw() {
-      ctx.clearRect(0, 0, canvasW, canvasH);
-
-      targetAlpha = hoveredIdx !== null ? 1 : 0;
-      currentAlpha += (targetAlpha - currentAlpha) * 0.08;
-
-      if (currentAlpha > 0.005 && displayIdx !== null) {
-        ctx.save();
-        ctx.globalAlpha = currentAlpha;
-
-        // Preview rectangle — large, centered between columns
-        const w = canvasW * 0.28;
-        const h = canvasH * 0.55;
-        const x = canvasW * 0.5 - w / 2;
-        const y = (canvasH - h) / 2;
-
-        const c = colors[displayIdx] || colors[0];
-        const grad = ctx.createLinearGradient(x, y, x + w, y + h);
-        grad.addColorStop(0, c[0]);
-        grad.addColorStop(1, c[1]);
-
-        ctx.fillStyle = grad;
-        ctx.fillRect(x, y, w, h);
-
-        // Label
-        ctx.fillStyle = 'rgba(255,255,255,0.2)';
-        ctx.font = '500 10px "General Sans", sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(names[displayIdx] || '', x + w / 2, y + h / 2 + 3);
-
-        ctx.restore();
+        allNames.forEach(n => n.classList.remove('active'));
+        const match = document.querySelector(`.project-name[data-index="${closestIdx}"]`);
+        if (match) match.classList.add('active');
       }
 
-      requestAnimationFrame(draw);
+      function updateParallax() {
+        const containerRect = photos.getBoundingClientRect();
+        const containerH = containerRect.height;
+
+        photoItems.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const inner = item.querySelector('.photo-inner');
+          if (!inner) return;
+
+          const itemCenter = rect.top + rect.height / 2;
+          const viewCenter = containerRect.top + containerH / 2;
+          const ratio = (itemCenter - viewCenter) / containerH;
+          const shift = ratio * 15;
+          inner.style.transform = `translateY(${shift}%)`;
+        });
+      }
+
+      function onScroll() {
+        updateActiveNames();
+        updateParallax();
+      }
+
+      photos.addEventListener('scroll', onScroll);
+      setTimeout(onScroll, 800);
+
+      const hoverTargets = document.querySelectorAll('.project-name, .photo-item');
+      hoverTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          if (crosshairFill) crosshairFill.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+          if (crosshairFill) crosshairFill.classList.remove('active');
+        });
+      });
     }
-
-    draw();
-
-    // Hover listeners
-    document.querySelectorAll('.project-li').forEach((li) => {
-      li.addEventListener('mouseenter', () => {
-        const id = li.getAttribute('data-id');
-        const idx = parseInt(id.replace('project-', ''));
-        hoveredIdx = idx;
-        displayIdx = idx;
-        if (crosshairFill) crosshairFill.classList.add('active');
-        if (projectTextSpan) projectTextSpan.classList.add('visible');
-      });
-
-      li.addEventListener('mouseleave', () => {
-        hoveredIdx = null;
-        if (crosshairFill) crosshairFill.classList.remove('active');
-        if (projectTextSpan) projectTextSpan.classList.remove('visible');
-      });
-    });
   }
 
   /* ══════════════════════════════════════════════════════════

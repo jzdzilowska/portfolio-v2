@@ -42,72 +42,35 @@
       <span id="loaderBar" class="loader-bar"></span>
     </div>
 
-    <!-- ── Canvas for hover image previews ── -->
-    <canvas id="projectCanvas" class="project-canvas"></canvas>
+    <!-- ── Three-column layout: names | photos | names ── -->
+    <div id="projectLayout" class="project-layout">
 
-    <!-- ── View Toggle (List / Slider) ── -->
-    <div class="view-toggle" id="viewToggle">
-      <span id="listBtn">List</span>
-      <span id="sliderBtn">Slider</span>
-    </div>
-
-    <!-- ── Project List Container ── -->
-    <div id="projectListWrap" class="project-list-wrap">
-
-      <!-- Left Column (projects 1-4, left aligned) -->
-      <div class="project-col project-col-left">
-        <div class="project-row">
-          <li data-slug="runwave" data-id="project-0" class="project-li" onclick="navigateTo(event, 'projects/runwave.html')">
-            <span class="proj-num">01/</span>
-            <span class="proj-name">Runwave</span>
-          </li>
-        </div>
-        <div class="project-row">
-          <li data-slug="saute" data-id="project-1" class="project-li" onclick="navigateTo(event, 'projects/saute.html')">
-            <span class="proj-num">02/</span>
-            <span class="proj-name">Saute</span>
-          </li>
-        </div>
-        <div class="project-row">
-          <li data-slug="giraffe" data-id="project-2" class="project-li" onclick="navigateTo(event, 'projects/giraffe.html')">
-            <span class="proj-num">03/</span>
-            <span class="proj-name">Giraffe Lab</span>
-          </li>
-        </div>
-        <div class="project-row">
-          <li data-slug="amazon" data-id="project-3" class="project-li" onclick="navigateTo(event, 'projects/amazon.html')">
-            <span class="proj-num">04/</span>
-            <span class="proj-name">Amazon</span>
-          </li>
-        </div>
+      <!-- Left names (01-04) — fixed position -->
+      <div class="project-names project-names--left">
+        <div class="project-name" data-index="0" onclick="navigateTo(event, 'projects/runwave.html')"><span class="pn-num">01/</span><span class="pn-label">Runwave</span></div>
+        <div class="project-name" data-index="1" onclick="navigateTo(event, 'projects/saute.html')"><span class="pn-num">02/</span><span class="pn-label">Saute</span></div>
+        <div class="project-name" data-index="2" onclick="navigateTo(event, 'projects/giraffe.html')"><span class="pn-num">03/</span><span class="pn-label">Giraffe Lab</span></div>
+        <div class="project-name" data-index="3" onclick="navigateTo(event, 'projects/amazon.html')"><span class="pn-num">04/</span><span class="pn-label">Amazon</span></div>
       </div>
 
-      <!-- Right Column (projects 5-8, right aligned) -->
-      <div class="project-col project-col-right">
-        <div class="project-row project-row-right">
-          <li data-slug="tryp" data-id="project-4" class="project-li" onclick="navigateTo(event, 'projects/tryp.html')">
-            <span class="proj-num">05/</span>
-            <span class="proj-name">Tryp</span>
-          </li>
-        </div>
-        <div class="project-row project-row-right">
-          <li data-slug="greencar" data-id="project-5" class="project-li" onclick="navigateTo(event, 'projects/greencar.html')">
-            <span class="proj-num">06/</span>
-            <span class="proj-name">GreenCarLane</span>
-          </li>
-        </div>
-        <div class="project-row project-row-right">
-          <li data-slug="drowsiness" data-id="project-6" class="project-li" onclick="navigateTo(event, 'projects/drowsiness.html')">
-            <span class="proj-num">07/</span>
-            <span class="proj-name">Drowsiness Detection</span>
-          </li>
-        </div>
-        <div class="project-row project-row-right">
-          <li data-slug="freelance" data-id="project-7" class="project-li" onclick="navigateTo(event, 'projects/freelance.html')">
-            <span class="proj-num">08/</span>
-            <span class="proj-name">Freelance</span>
-          </li>
-        </div>
+      <!-- Center — scrollable photos -->
+      <div class="project-photos" id="projectPhotos">
+        <div class="photo-item" data-index="0" onclick="navigateTo(event, 'projects/runwave.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="1" onclick="navigateTo(event, 'projects/saute.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="2" onclick="navigateTo(event, 'projects/giraffe.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="3" onclick="navigateTo(event, 'projects/amazon.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="4" onclick="navigateTo(event, 'projects/tryp.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="5" onclick="navigateTo(event, 'projects/greencar.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="6" onclick="navigateTo(event, 'projects/drowsiness.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+        <div class="photo-item" data-index="7" onclick="navigateTo(event, 'projects/freelance.html')"><div class="photo-inner"><div class="photo-placeholder"></div></div></div>
+      </div>
+
+      <!-- Right names (05-08) — fixed position -->
+      <div class="project-names project-names--right">
+        <div class="project-name" data-index="4" onclick="navigateTo(event, 'projects/tryp.html')"><span class="pn-label">Tryp</span><span class="pn-num">05/</span></div>
+        <div class="project-name" data-index="5" onclick="navigateTo(event, 'projects/greencar.html')"><span class="pn-label">GreenCarLane</span><span class="pn-num">06/</span></div>
+        <div class="project-name" data-index="6" onclick="navigateTo(event, 'projects/drowsiness.html')"><span class="pn-label">Drowsiness Detection</span><span class="pn-num">07/</span></div>
+        <div class="project-name" data-index="7" onclick="navigateTo(event, 'projects/freelance.html')"><span class="pn-label">Freelance</span><span class="pn-num">08/</span></div>
       </div>
 
     </div>
