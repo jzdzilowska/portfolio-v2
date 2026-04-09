@@ -155,34 +155,54 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       measureSet();
-      // Start scroll at the middle set (the originals)
       photos.scrollTop = setHeight;
 
-      let ticking = false;
+      // Lerp-based smooth / lazy scroll
+      const LERP = 0.07;
+      const SCROLL_SPEED = 1.2;
+      let targetScroll = photos.scrollTop;
+      let currentScroll = targetScroll;
+      let rafId = null;
 
-      function onScroll() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const scrollTop = photos.scrollTop;
+      // Hijack wheel events — prevent native scroll, drive our own
+      photos.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        targetScroll += e.deltaY * SCROLL_SPEED;
+      }, { passive: false });
 
-          // If scrolled past the original set into the bottom clones, jump back
-          if (scrollTop >= setHeight * 2) {
-            photos.scrollTop = scrollTop - setHeight;
-          }
-          // If scrolled above the original set into the top clones, jump forward
-          else if (scrollTop < setHeight) {
-            // Only jump once we've scrolled well into the top clones
-            if (scrollTop <= 0) {
-              photos.scrollTop = scrollTop + setHeight;
-            }
-          }
+      // Also allow wheel anywhere on the page to scroll photos
+      document.addEventListener('wheel', (e) => {
+        if (e.target.closest('.project-photos')) return;
+        if (!document.querySelector('.project-layout')) return;
+        e.preventDefault();
+        targetScroll += e.deltaY * SCROLL_SPEED;
+      }, { passive: false });
 
-          updateActiveNames();
-          updateParallax();
-          ticking = false;
-        });
+      function tick() {
+        currentScroll += (targetScroll - currentScroll) * LERP;
+        photos.scrollTop = currentScroll;
+
+        const scrollTop = photos.scrollTop;
+
+        // Infinite loop: wrap around when hitting clones
+        if (scrollTop >= setHeight * 2) {
+          const jump = setHeight;
+          photos.scrollTop = scrollTop - jump;
+          currentScroll -= jump;
+          targetScroll -= jump;
+        } else if (scrollTop <= 0) {
+          const jump = setHeight;
+          photos.scrollTop = scrollTop + jump;
+          currentScroll += jump;
+          targetScroll += jump;
+        }
+
+        updateActiveNames();
+        updateParallax();
+        rafId = requestAnimationFrame(tick);
       }
+
+      rafId = requestAnimationFrame(tick);
 
       function updateActiveNames() {
         const containerRect = photos.getBoundingClientRect();
@@ -221,9 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      photos.addEventListener('scroll', onScroll);
       window.addEventListener('resize', () => { measureSet(); });
-      setTimeout(() => { updateActiveNames(); updateParallax(); }, 800);
 
       const hoverTargets = document.querySelectorAll('.project-name, .photo-item');
       hoverTargets.forEach(el => {
